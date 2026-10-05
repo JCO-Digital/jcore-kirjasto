@@ -4,7 +4,7 @@ Tags: media, media library, folders, attachments, unused media
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.0.0
+Stable tag: 0.1.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,3 +104,8 @@ Yes: remove `usage` or `folders` with the `jcore_kirjasto_features` filter.
 Deleting the plugin drops the usage index and removes its options. Folders are kept, so a reinstall finds them again. Deactivating the plugin leaves everything in place.
 
 == Changelog ==
+
+= 0.1.0 =
+
+* Feature: media library folders and attachment usage
+* Initial commit

@@ -1,6 +1,6 @@
 {
   "name": "jcore-kirjasto",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "WordPress media library tools: folders for organising attachments, and where each attachment is used.",
   "author": "J&Co Digital Oy <support@jco.fi>",
   "license": "GPL-2.0-or-later",

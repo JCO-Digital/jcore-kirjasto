@@ -3,7 +3,7 @@
  * Plugin Name:       JCORE Kirjasto
  * Plugin URI:        https://github.com/JCO-Digital/jcore-kirjasto
  * Description:       Media library tools: folders for organising attachments, and where each attachment is used.
- * Version:           0.0.0
+ * Version:           0.1.0
  * Requires at least: 6.7
  * Tested up to:      7.1
  * Requires PHP:      8.2
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'JCORE_KIRJASTO_VERSION', '0.0.0' );
+define( 'JCORE_KIRJASTO_VERSION', '0.1.0' );
 define( 'JCORE_KIRJASTO_FILE', __FILE__ );
 define( 'JCORE_KIRJASTO_PATH', plugin_dir_path( __FILE__ ) );
 define( 'JCORE_KIRJASTO_URL', plugin_dir_url( __FILE__ ) );
