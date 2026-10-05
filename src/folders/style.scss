@@ -1,0 +1,369 @@
+// The folder list, beside the Media screen and inside the media modal.
+
+$sidebar-width: 260px;
+$modal-width: 220px;
+$row-height: 32px;
+$indent: 14px;
+
+.jcore-kirjasto-folders {
+	padding: 12px 8px 16px;
+	font-size: 13px;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		margin: 0;
+	}
+
+	.components-notice {
+		margin: 0 0 8px;
+	}
+}
+
+.jcore-kirjasto-folders__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	min-height: $row-height;
+	padding: 0 4px 0 8px;
+	margin-bottom: 4px;
+}
+
+.jcore-kirjasto-folders__title {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.jcore-kirjasto-folders__views {
+	padding-bottom: 6px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.jcore-kirjasto-folders__top-level {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-height: $row-height;
+	margin-bottom: 4px;
+	padding: 0 8px;
+	border: 1px dashed #8c8f94;
+	border-radius: 2px;
+	color: #50575e;
+
+	svg {
+		fill: currentcolor;
+	}
+
+	&.is-drop-target {
+		border-style: solid;
+		border-color: var(--wp-admin-theme-color, #2271b1);
+		background: #f0f6fc;
+		color: var(--wp-admin-theme-color, #2271b1);
+	}
+}
+
+.jcore-kirjasto-folders__row {
+	display: flex;
+	align-items: center;
+	min-height: $row-height;
+	padding-left: calc(var(--jcore-kirjasto-depth, 0) * #{$indent});
+	border-radius: 2px;
+
+	&:hover {
+		background: #f0f0f1;
+	}
+
+	&.is-selected {
+		background: #f0f6fc;
+		color: var(--wp-admin-theme-color, #2271b1);
+	}
+
+	&.is-drop-target {
+		background: #f0f6fc;
+		box-shadow: inset 0 0 0 2px var(--wp-admin-theme-color, #2271b1);
+	}
+
+	&[draggable="true"] {
+		cursor: grab;
+	}
+
+	> svg {
+		flex: none;
+		margin-right: 6px;
+		fill: currentcolor;
+	}
+}
+
+.jcore-kirjasto-folders__toggle {
+	flex: none;
+	width: 24px;
+
+	&.components-button.has-icon {
+		min-width: 24px;
+		padding: 0;
+	}
+}
+
+.jcore-kirjasto-folders__select {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	min-height: $row-height;
+	padding: 0 4px 0 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+
+	&[aria-current="true"] {
+		font-weight: 600;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+		outline-offset: -2px;
+		border-radius: 2px;
+	}
+
+	svg {
+		flex: none;
+		fill: currentcolor;
+	}
+}
+
+.jcore-kirjasto-folders__name {
+	flex: 1;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.jcore-kirjasto-folders__count {
+	flex: none;
+	color: #646970;
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+}
+
+// The actions only show while they can be used.
+.jcore-kirjasto-folders__actions {
+	flex: none;
+	opacity: 0;
+
+	&:has([aria-expanded="true"]) {
+		opacity: 1;
+	}
+
+	.components-button.has-icon {
+		min-width: 24px;
+		padding: 0;
+	}
+}
+
+.jcore-kirjasto-folders__row:hover .jcore-kirjasto-folders__actions,
+.jcore-kirjasto-folders__row:focus-within .jcore-kirjasto-folders__actions {
+	opacity: 1;
+}
+
+.jcore-kirjasto-folders__input {
+	flex: 1;
+	min-width: 0;
+	min-height: 28px;
+	margin-right: 4px;
+	padding: 0 6px;
+	font-size: 13px;
+}
+
+.jcore-kirjasto-folders__confirm,
+.jcore-kirjasto-folders__import-source {
+	margin: 4px 0 8px;
+	padding: 8px 10px;
+	border: 1px solid #dcdcde;
+	border-radius: 2px;
+	background: #fff;
+
+	p {
+		margin: 0 0 8px;
+	}
+}
+
+.jcore-kirjasto-folders__confirm {
+	border-color: #d63638;
+}
+
+.jcore-kirjasto-folders__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.jcore-kirjasto-folders__empty {
+	margin: 8px;
+	color: #646970;
+}
+
+.jcore-kirjasto-folders__import {
+	margin-top: 12px;
+}
+
+.jcore-kirjasto-folders__progress {
+	margin: 6px 0 0;
+	color: #646970;
+	font-size: 12px;
+}
+
+// What follows the pointer while files are dragged.
+.jcore-kirjasto-drag-image {
+	position: fixed;
+	top: -100px;
+	left: -100px;
+	padding: 6px 10px;
+	border-radius: 2px;
+	background: var(--wp-admin-theme-color, #2271b1);
+	color: #fff;
+	font-size: 13px;
+	white-space: nowrap;
+}
+
+// The Media screen: the list sits in a column of its own, beside the page.
+.jcore-kirjasto-folders-screen #wpbody-content {
+	position: relative;
+	box-sizing: border-box;
+	padding-left: $sidebar-width + 12px;
+}
+
+.jcore-kirjasto-folders-sidebar {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: $sidebar-width;
+	min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+	border-right: 1px solid #dcdcde;
+	background: #fff;
+
+	> .jcore-kirjasto-folders {
+		position: sticky;
+		top: var(--wp-admin--admin-bar--height, 32px);
+		box-sizing: border-box;
+		max-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+		overflow-y: auto;
+	}
+}
+
+// Hidden, the list leaves a narrow rail with a button to bring it back.
+.jcore-kirjasto-folders-screen.jcore-kirjasto-folders-hidden {
+
+	#wpbody-content {
+		padding-left: 52px;
+	}
+
+	.jcore-kirjasto-folders-sidebar {
+		width: 40px;
+	}
+}
+
+.jcore-kirjasto-folders-show {
+	position: sticky;
+	top: calc(var(--wp-admin--admin-bar--height, 32px) + 8px);
+	margin: 8px 4px;
+}
+
+// Core sizes the grid toolbar by the window, which no longer matches the
+// grid once the folder list takes its share. Size it by the grid instead.
+.jcore-kirjasto-folders-screen .media-frame.mode-grid {
+	container-type: inline-size;
+}
+
+@container (max-width: 1000px) {
+
+	.media-frame.mode-grid .media-toolbar-secondary,
+	.media-frame.mode-grid .media-toolbar-primary {
+		float: none;
+		max-width: 100%;
+	}
+
+	.media-frame.mode-grid .media-toolbar-primary {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 8px;
+	}
+}
+
+@media screen and (max-width: 782px) {
+
+	.jcore-kirjasto-folders-screen #wpbody-content {
+		padding-left: 0;
+	}
+
+	.jcore-kirjasto-folders-sidebar {
+		position: static;
+		width: auto;
+		margin: 0 10px 10px 0;
+		border: 1px solid #dcdcde;
+
+		> .jcore-kirjasto-folders {
+			position: static;
+			max-height: 40vh;
+		}
+	}
+}
+
+// The media modal: the list takes the left edge of the library.
+.attachments-browser.has-jcore-kirjasto-folders {
+
+	.media-toolbar,
+	.attachments-wrapper,
+	&:not(.has-load-more) .attachments,
+	.uploader-inline {
+		left: $modal-width;
+	}
+}
+
+.jcore-kirjasto-folders-modal {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	box-sizing: border-box;
+	width: $modal-width;
+	overflow-y: auto;
+	border-right: 1px solid #dcdcde;
+	background: #fff;
+}
+
+@media screen and (max-width: 782px) {
+
+	.attachments-browser.has-jcore-kirjasto-folders {
+
+		.media-toolbar,
+		.attachments-wrapper,
+		&:not(.has-load-more) .attachments,
+		.uploader-inline {
+			left: 0;
+		}
+	}
+
+	.jcore-kirjasto-folders-modal {
+		display: none;
+	}
+}
+
+// List mode: the folder picker beside the bulk actions.
+.jcore-kirjasto-bulk-folder {
+	max-width: 14rem;
+	margin-right: 6px;
+}

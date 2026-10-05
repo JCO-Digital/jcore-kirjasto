@@ -1,0 +1,57 @@
+// The "Used in" list: the media list column, the attachment details in the
+// media modal and the attachment edit screen.
+.jcore-kirjasto-usage {
+	margin: 0;
+	list-style: none;
+
+	&__item {
+		margin: 0 0 6px;
+		line-height: 1.4;
+	}
+
+	&__meta {
+		display: block;
+		color: #646970;
+		font-size: 12px;
+	}
+
+	&__badge {
+		display: inline-block;
+		margin-left: 4px;
+		padding: 0 6px;
+		border-radius: 2px;
+		background: #f0f0f1;
+		color: #50575e;
+		font-size: 11px;
+		line-height: 18px;
+		vertical-align: baseline;
+	}
+
+	&__none,
+	&__hidden,
+	&__notice {
+		color: #646970;
+	}
+
+	&__hidden,
+	&__notice {
+		margin: 4px 0 0;
+		font-size: 12px;
+	}
+
+	&__notice {
+		font-style: italic;
+	}
+}
+
+// A fixed width rather than a percentage: plugins that add pixel-wide columns
+// would otherwise squeeze a percentage column down to nothing.
+.fixed .column-jcore_kirjasto_usage {
+	width: 16em;
+}
+
+// The modal renders compat fields as table rows; keep the list aligned with
+// the label instead of floating below it.
+.compat-field-jcore_kirjasto_usage .field {
+	padding-top: 6px;
+}

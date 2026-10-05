@@ -1,0 +1,422 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JCORE Kirjasto 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jcore-kirjasto\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-05T09:09:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: jcore-kirjasto\n"
+
+#. Plugin Name of the plugin
+#: jcore-kirjasto.php
+msgid "JCORE Kirjasto"
+msgstr "JCORE Kirjasto"
+
+#. Plugin URI of the plugin
+#: jcore-kirjasto.php
+msgid "https://github.com/JCO-Digital/jcore-kirjasto"
+msgstr ""
+
+#. Description of the plugin
+#: jcore-kirjasto.php
+msgid "Media library tools: folders for organising attachments, and where each attachment is used."
+msgstr "Mediakirjaston työkalut: kansiot tiedostojen järjestämiseen ja tieto siitä, missä kutakin tiedostoa käytetään."
+
+#. Author of the plugin
+#: jcore-kirjasto.php
+msgid "J&Co Digital Oy"
+msgstr ""
+
+#. Author URI of the plugin
+#: jcore-kirjasto.php
+msgid "https://jco.fi"
+msgstr ""
+
+#: includes/usage/admin/class-media-library.php:73
+#: includes/usage/admin/class-media-library.php:78
+#: includes/usage/admin/class-media-library.php:112
+msgid "Used in"
+msgstr "Käytössä"
+
+#: includes/usage/admin/class-media-library.php:137
+#: build/usage-media.js:1
+msgid "All usage"
+msgstr "Kaikki käyttö"
+
+#: includes/usage/admin/class-media-library.php:138
+#: build/usage-media.js:1
+#: build/usage-page.js:3
+msgid "Used"
+msgstr "Käytössä"
+
+#: includes/usage/admin/class-media-library.php:139
+#: build/usage-media.js:1
+#: build/usage-page.js:3
+msgid "Not used"
+msgstr "Ei käytössä"
+
+#: includes/usage/admin/class-media-library.php:145
+#: build/usage-media.js:1
+msgid "Filter by usage"
+msgstr "Suodata käytön mukaan"
+
+#: includes/usage/admin/class-page.php:62
+#: build/usage-page.js:1
+msgid "Media Usage"
+msgstr "Median käyttö"
+
+#: includes/usage/admin/class-page.php:63
+msgid "Usage"
+msgstr "Käyttö"
+
+#: includes/usage/class-feature.php:60
+#: build/usage-page.js:1
+msgid "Usage index"
+msgstr "Käyttöhakemisto"
+
+#: includes/usage/class-report.php:138
+msgid "The usage index is still being built, so this list may be incomplete."
+msgstr "Käyttöhakemistoa rakennetaan vielä, joten lista voi olla puutteellinen."
+
+#: includes/usage/class-report.php:142
+msgid "Not used anywhere"
+msgstr "Ei käytössä missään"
+
+#. translators: %d: number of further places the attachment is used in.
+#: includes/usage/class-report.php:163
+#, php-format
+msgid "and %d more"
+msgid_plural "and %d more"
+msgstr[0] "ja %d muu"
+msgstr[1] "ja %d muuta"
+
+#. translators: %d: number of places the current user may not see.
+#: includes/usage/class-report.php:174
+#, php-format
+msgid "Also used in %d item you do not have access to."
+msgid_plural "Also used in %d items you do not have access to."
+msgstr[0] "Käytössä myös %d kohteessa, johon sinulla ei ole pääsyä."
+msgstr[1] "Käytössä myös %d kohteessa, joihin sinulla ei ole pääsyä."
+
+#: includes/usage/class-report.php:296
+msgid "(no title)"
+msgstr "(ei otsikkoa)"
+
+#: includes/usage/class-report.php:370
+msgid "Settings"
+msgstr "Asetukset"
+
+#: includes/usage/class-report.php:355
+msgid "Theme"
+msgstr "Teema"
+
+#: includes/usage/class-report.php:375
+msgid "Yoast SEO"
+msgstr "Yoast SEO"
+
+#: includes/usage/class-report.php:380
+msgid "Site icon"
+msgstr "Sivuston kuvake"
+
+#: includes/usage/class-report.php:385
+msgid "Site logo"
+msgstr "Sivuston logo"
+
+#: includes/usage/class-report.php:395
+msgid "Options"
+msgstr "Asetukset"
+
+#: includes/usage/class-report.php:414
+msgid "Content"
+msgstr "Sisältö"
+
+#: includes/usage/class-report.php:417
+msgid "Featured image"
+msgstr "Artikkelikuva"
+
+#: includes/usage/class-report.php:424
+msgid "Default social image"
+msgstr "Oletuskuva somejakoon"
+
+#: includes/usage/class-report.php:456
+msgid "Product gallery"
+msgstr "Tuotegalleria"
+
+#: includes/usage/class-report.php:457
+msgid "Social image"
+msgstr "Somejakokuva"
+
+#: includes/usage/class-report.php:458
+msgid "X image"
+msgstr "X-kuva"
+
+#: includes/usage/class-report.php:459
+msgid "Thumbnail"
+msgstr "Pienoiskuva"
+
+#: build/usage-page.js:1
+msgid "Indexing failed."
+msgstr "Indeksointi epäonnistui."
+
+#: build/usage-page.js:1
+msgid "Failed to load the index status."
+msgstr "Hakemiston tilan lataaminen epäonnistui."
+
+#: build/usage-page.js:1
+msgid "Every post, page, pattern, template, term and ACF options page is scanned for the attachments it uses. The media library shows the result in the \"Used in\" column and in the attachment details."
+msgstr "Jokaisesta artikkelista, sivusta, lohkosuunnitelmasta, sivupohjasta, termistä ja ACF-asetussivusta etsitään sen käyttämät mediatiedostot. Mediakirjasto näyttää tuloksen ”Käytössä”-sarakkeessa ja liitteen tiedoissa."
+
+#. translators: %s: date and time
+#: build/usage-page.js:2
+#, js-format
+msgid "Last built %s. Changes to content are indexed as they are saved."
+msgstr "Rakennettu viimeksi %s. Sisällön muutokset indeksoidaan tallennettaessa."
+
+#: build/usage-page.js:2
+msgid "The index has not been built yet. Until it is, attachments may show as not used even though they are."
+msgstr "Hakemistoa ei ole vielä rakennettu. Siihen asti tiedostot voivat näkyä käyttämättöminä, vaikka niitä käytetään."
+
+#. translators: 1: items scanned so far, 2: items in total
+#: build/usage-page.js:3
+#, js-format
+msgid "%1$s of %2$s items scanned"
+msgstr "%1$s / %2$s kohdetta käyty läpi"
+
+#: build/usage-page.js:3
+msgid "Failed to start the rebuild."
+msgstr "Uudelleenrakennuksen aloittaminen epäonnistui."
+
+#: build/usage-page.js:3
+msgid "Rebuilding…"
+msgstr "Rakennetaan…"
+
+#: build/usage-page.js:3
+msgid "Rebuild index"
+msgstr "Rakenna hakemisto uudelleen"
+
+#: build/usage-page.js:3
+msgid "Only needed after content was changed directly in the database, e.g. by an import or a search-replace."
+msgstr "Tarpeen vain, jos sisältöä on muutettu suoraan tietokannassa, esim. tuonnilla tai hae-ja-korvaa-toiminnolla."
+
+#: build/usage-page.js:3
+msgid "Summary"
+msgstr "Yhteenveto"
+
+#: build/usage-page.js:3
+msgid "Attachments"
+msgstr "Mediatiedostot"
+
+#: build/usage-page.js:3
+msgid "References"
+msgstr "Viittaukset"
+
+#: includes/folders/admin/class-media-library.php:140
+#: build/folders.js:12
+msgid "No folder"
+msgstr "Ei kansiota"
+
+#: includes/folders/admin/class-media-library.php:144
+#: includes/folders/class-folders.php:46
+msgid "Folder"
+msgstr "Kansio"
+
+#: includes/folders/admin/class-media-library.php:206
+msgid "Move to folder"
+msgstr "Siirrä kansioon"
+
+#. translators: %d: number of files moved.
+#: includes/folders/admin/class-media-library.php:278
+#, php-format
+msgid "%d file moved."
+msgid_plural "%d files moved."
+msgstr[0] "%d tiedosto siirretty."
+msgstr[1] "%d tiedostoa siirretty."
+
+#: includes/folders/class-folders.php:45
+#: build/folders.js:12
+msgid "Folders"
+msgstr "Kansiot"
+
+#: includes/folders/class-folders.php:146
+#: includes/folders/class-folders.php:177
+msgid "A folder needs a name."
+msgstr "Kansiolla on oltava nimi."
+
+#: includes/folders/class-folders.php:188
+msgid "A folder cannot be moved into itself."
+msgstr "Kansiota ei voi siirtää itsensä sisään."
+
+#: includes/folders/class-folders.php:386
+msgid "The folder does not exist."
+msgstr "Kansiota ei ole olemassa."
+
+#: includes/folders/class-folders.php:399
+msgid "There is already a folder with this name here."
+msgstr "Täällä on jo tämänniminen kansio."
+
+#: includes/folders/class-importer.php:91
+msgid "Folders cannot be imported from this source."
+msgstr "Tästä lähteestä ei voi tuoda kansioita."
+
+#: includes/folders/class-importer.php:218
+msgid "Untitled folder"
+msgstr "Nimetön kansio"
+
+#: includes/folders/rest/class-folders-controller.php:226
+msgid "You are not allowed to move these files."
+msgstr "Sinulla ei ole oikeutta siirtää näitä tiedostoja."
+
+#. translators: %d: number of files being dragged.
+#: build/folders.js:2
+#, js-format
+msgid "Move %d file"
+msgid_plural "Move %d files"
+msgstr[0] "Siirrä %d tiedosto"
+msgstr[1] "Siirrä %d tiedostoa"
+
+#: build/folders.js:2
+msgid "New folder name"
+msgstr "Uuden kansion nimi"
+
+#. translators: 1: folder name, 2: name of its parent folder.
+#: build/folders.js:3
+#, js-format
+msgid "Delete “%1$s”? Its files and subfolders move to “%2$s”."
+msgstr "Poistetaanko ”%1$s”? Sen tiedostot ja alikansiot siirretään kansioon ”%2$s”."
+
+#. translators: %s: folder name.
+#: build/folders.js:4
+#, js-format
+msgid "Delete “%s”? Its subfolders move to the top level and its files are left without a folder."
+msgstr "Poistetaanko ”%s”? Sen alikansiot siirretään ylimmälle tasolle, ja sen tiedostot jäävät ilman kansiota."
+
+#: build/folders.js:4
+#: build/folders.js:7
+msgid "Delete"
+msgstr "Poista"
+
+#: build/folders.js:4
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. translators: %s: folder name.
+#: build/folders.js:5
+#, js-format
+msgid "Expand %s"
+msgstr "Avaa %s"
+
+#. translators: %s: folder name.
+#: build/folders.js:6
+#, js-format
+msgid "Collapse %s"
+msgstr "Sulje %s"
+
+#: build/folders.js:6
+msgid "Folder name"
+msgstr "Kansion nimi"
+
+#. translators: %s: folder name.
+#: build/folders.js:7
+#, js-format
+msgid "Actions for %s"
+msgstr "Toiminnot: %s"
+
+#: build/folders.js:7
+#: build/folders.js:12
+msgid "New subfolder"
+msgstr "Uusi alikansio"
+
+#: build/folders.js:7
+msgid "Rename"
+msgstr "Nimeä uudelleen"
+
+#. translators: 1: plugin name, 2: "25 folders", 3: "279 files".
+#: build/folders.js:8
+#, js-format
+msgid "%1$s has %2$s with %3$s."
+msgstr "Lisäosassa %1$s on %2$s, joissa on %3$s."
+
+#. translators: %s: number of folders.
+#: build/folders.js:9
+#, js-format
+msgid "%s folder"
+msgid_plural "%s folders"
+msgstr[0] "%s kansio"
+msgstr[1] "%s kansiota"
+
+#. translators: %s: number of files.
+#: build/folders.js:10
+#, js-format
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s tiedosto"
+msgstr[1] "%s tiedostoa"
+
+#. translators: 1: files handled so far, 2: all files.
+#: build/folders.js:11
+#, js-format
+msgid "%1$s of %2$s files"
+msgstr "%1$s / %2$s tiedostoa"
+
+#. translators: 1: number of folders, 2: plugin name.
+#: build/folders.js:12
+#, js-format
+msgid "Imported %1$s folder from %2$s."
+msgid_plural "Imported %1$s folders from %2$s."
+msgstr[0] "%1$s kansio tuotiin lisäosasta %2$s."
+msgstr[1] "%1$s kansiota tuotiin lisäosasta %2$s."
+
+#: build/folders.js:12
+msgid "The folders could not be imported."
+msgstr "Kansioita ei voitu tuoda."
+
+#: build/folders.js:12
+msgid "Import folders"
+msgstr "Tuo kansiot"
+
+#: build/folders.js:12
+msgid "Not now"
+msgstr "Ei nyt"
+
+#: build/folders.js:12
+msgid "The folders could not be saved."
+msgstr "Kansioita ei voitu tallentaa."
+
+#: build/folders.js:12
+msgid "New folder"
+msgstr "Uusi kansio"
+
+#: build/folders.js:12
+msgid "All files"
+msgstr "Kaikki tiedostot"
+
+#: build/folders.js:12
+msgid "Move to the top level"
+msgstr "Siirrä ylimmälle tasolle"
+
+#: build/folders.js:12
+msgid "No folders yet. Create one with the + button, then drag files onto it."
+msgstr "Kansioita ei vielä ole. Luo kansio +-painikkeella ja vedä tiedostoja sen päälle."
+
+#: build/folders.js:12
+msgid "No folders yet."
+msgstr "Kansioita ei vielä ole."
+
+#: build/folders.js:12
+msgid "Folder to move the files to"
+msgstr "Kansio, johon tiedostot siirretään"
+
+#: build/folders.js:12
+msgid "Hide folders"
+msgstr "Piilota kansiot"
+
+#: build/folders.js:12
+msgid "Show folders"
+msgstr "Näytä kansiot"

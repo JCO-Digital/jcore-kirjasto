@@ -1,0 +1,38 @@
+{
+  "name": "jcore-kirjasto",
+  "version": "0.0.0",
+  "description": "WordPress media library tools: folders for organising attachments, and where each attachment is used.",
+  "author": "J&Co Digital Oy <support@jco.fi>",
+  "license": "GPL-2.0-or-later",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "format": "wp-scripts format src",
+    "lint:js": "wp-scripts lint-js src",
+    "lint:css": "wp-scripts lint-style 'src/**/*.scss'",
+    "lint:php": "composer lint",
+    "check": "pnpm lint:js && pnpm lint:css && pnpm lint:php",
+    "i18n": "pnpm make-pot && pnpm make-mo && pnpm make-json",
+    "make-pot": "wp i18n make-pot . languages/jcore-kirjasto.pot --domain=jcore-kirjasto --slug=jcore-kirjasto --exclude=vendor,node_modules,src,release,.wp",
+    "make-mo": "wp i18n make-mo languages languages",
+    "make-json": "pnpm dlx --package='@wp-blocks/make-pot@1.6.3' makejson build/ languages/",
+    "playground": "wp-playground-cli server --blueprint=.wp/blueprint.json --mount=.:/wordpress/wp-content/plugins/jcore-kirjasto --php=8.2 --port=8883"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.27.0",
+    "@wp-playground/cli": "^3.1.54"
+  },
+  "packageManager": "pnpm@11.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCO-Digital/jcore-kirjasto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JCO-Digital/jcore-kirjasto/issues"
+  },
+  "homepage": "https://github.com/JCO-Digital/jcore-kirjasto#readme",
+  "dependencies": {
+    "@wordpress/icons": "^17.0.0"
+  }
+}

@@ -1,0 +1,81 @@
+.jcore-kirjasto {
+	max-width: 1200px;
+
+	> .description {
+		max-width: 70ch;
+		margin-bottom: 16px;
+	}
+
+	// Remove default panel border so PanelBody borders stand on their own.
+	> .components-panel {
+		border: none;
+		background: none;
+	}
+
+	.components-panel__body {
+		background: #fff;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+		margin-bottom: 16px;
+
+		+ .components-panel__body {
+			border-top: 1px solid #dcdcde;
+			margin-top: 0;
+		}
+	}
+
+	.components-panel__row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	&__built {
+		margin: 0;
+	}
+
+	&__progress {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		width: 100%;
+		max-width: 480px;
+
+		.components-progress-bar {
+			width: 100%;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		.description {
+			margin: 0;
+		}
+	}
+
+	&__stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: 16px;
+		padding-top: 8px;
+	}
+
+	&__stat {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__stat-value {
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	&__stat-label {
+		color: #646970;
+	}
+}
