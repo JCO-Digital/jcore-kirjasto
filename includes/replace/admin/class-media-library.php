@@ -256,7 +256,7 @@ final class Media_Library {
 	 * @return bool
 	 */
 	private static function versions_urls(): bool {
-		return is_admin() && ! wp_doing_ajax() && 'GET' === ( $_SERVER['REQUEST_METHOD'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return is_admin() && ! wp_doing_ajax() && 'GET' === sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ?? '' ) );
 	}
 
 	/**

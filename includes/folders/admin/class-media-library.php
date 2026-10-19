@@ -226,7 +226,7 @@ final class Media_Library {
 
 		// Core checked the bulk-media nonce before applying this filter.
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended
-		$from_top = self::BULK_ACTION === ( $_REQUEST['action'] ?? '' );
+		$from_top = self::BULK_ACTION === sanitize_key( wp_unslash( $_REQUEST['action'] ?? '' ) );
 		$field    = self::BULK_ACTION . '_to' . ( $from_top ? '' : '2' );
 		$folder   = Folders::requested( isset( $_REQUEST[ $field ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ $field ] ) ) : null );
 		// phpcs:enable
