@@ -4,7 +4,7 @@ Tags: media, media library, folders, attachments, unused media
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,7 +119,12 @@ Deleting the plugin drops the usage index and removes its options. Folders are k
 
 == Changelog ==
 
-= 0.1.0 =
+= 0.2.0 (2026-10-19) =
+
+* Feature: replace media files in place
+* Fix: resolve the Plugin Check warnings
+
+= v0.1.0 (2026-10-05) =
 
 * Feature: media library folders and attachment usage
 * Initial commit
