@@ -4,6 +4,7 @@ The JCORE media library plugin. Each feature is a module of its own:
 
 - **Usage** – where every attachment is used: a "Used in" column, a used/not used filter and a "Used in" list in the attachment details, backed by an index of what each post, term, settings page and theme file refers to.
 - **Folders** – a folder tree beside the Media screen and inside every media modal. Files are dragged onto folders, uploads go into the open folder, and folders can be imported from FileBird, HappyFiles and Enhanced Media Library.
+- **Replace** – a new file in place of an attachment's file, of the same type. The attachment keeps its ID and the file its name, so the new file shows everywhere the old one was used.
 
 This file covers the repository and the development workflow. What the plugin does, and how to use it, is in [readme.txt](readme.txt).
 
@@ -73,11 +74,18 @@ includes/
     admin/class-media-library.php      Query filters, the folder field, uploads, bulk action, assets
     rest/class-folders-controller.php  Folders, moving files and imports
     cli/class-command.php              wp kirjasto folders list | import
+  replace/
+    class-feature.php                  Wires the replace feature to its hooks
+    class-replacer.php                 Puts a new file in place of an attachment's file
+    admin/class-media-library.php      "Replace file" field and row action, assets
+    rest/class-replace-controller.php  Takes the upload
+    cli/class-command.php              wp kirjasto replace
 views/usage/page.php                   Mount point for the Media > Usage app
 src/
   usage-page/                          The Media > Usage app (@wordpress/scripts)
   usage-media/                         Grid mode usage filter and the "Used in" list styles
   folders/                             The folder list and its media library integration
+  replace/                             The "Replace file" button
 languages/                             .po sources; .pot, .mo and .json are generated
 ```
 
@@ -109,6 +117,18 @@ Folders are terms of `jcore_kirjasto_folder`, a hidden, hierarchical attachment 
 
 The "Folder" field is rendered with the current folder only; the script fills in the tree. It is named `jcore_kirjasto_folder_id`, not after the taxonomy: core saves an attachment field named after a taxonomy itself, reading the value as term names.
 
+## How replacing works
+
+The attachment stays as it is – ID, title, alt text, folder, every reference to it – and only its file changes. The new file must have the attachment's MIME type, and takes the old file's name, so links to the file itself keep working.
+
+1. The upload goes through `wp_handle_upload()` like any other, so size limits, allowed types and upload filters apply. `Replacer` then checks its real type against the attachment's.
+2. The new file is moved over the original upload (the file a `-scaled` copy was made from, if any). The old resized copies, edit backups and the `.webp`/`.avif` copies optimisers keep beside each file are deleted.
+3. The metadata and resized copies are generated again, which runs image optimisers too. Attachments sharing the file – Polylang's media translations – get the new metadata as well.
+4. A new image with other proportions gets copies with other names, `photo-1024x576.jpg` instead of `photo-1024x767.jpg`. Post content linking to an old copy is rewritten to link to the new copy of the same size, or to the full image if the new one is too small for that size. The content is written directly, without a revision. Links in post meta, theme files or other sites are not rewritten.
+5. In the media modal and grid mode the attachment model takes the answer, and the views showing it redraw. The list and the edit screen reload.
+
+The file keeps its address, and image responses are commonly cached for a long time (and `Vary: Accept` keeps a refetch from replacing the cached copy), so the browser would keep showing the old file even after an ordinary reload. The admin therefore shows a replaced attachment's images with `?jcore-kirjasto-v={time of replacement}`: the media views add it to the template data only, so the model keeps the real addresses that are inserted into content and copied with "Copy URL", and PHP adds it to `wp_get_attachment_image_src()` and `srcset` on admin pages loaded with GET, outside AJAX. The front end and URLs in content are left as they are.
+
 ## REST API
 
 Both screens talk to `jcore-kirjasto/v1`.
@@ -122,6 +142,7 @@ Both screens talk to `jcore-kirjasto/v1`.
 | `/folders/{id}` | PATCH – rename or move; DELETE – delete | `jcore_kirjasto_folders_capability` |
 | `/folders/move` | POST – move attachments into a folder, or 0 for none | `upload_files`, and editing each file |
 | `/folders/import` | GET – sources with folders; POST – run an import step | `jcore_kirjasto_folders_capability` |
+| `/replace/{id}` | POST – replace the file with the uploaded `file` | `upload_files`, and editing the file |
 
 ## WP-CLI
 
@@ -131,11 +152,12 @@ wp kirjasto usage list 123           # Where attachment 123 is used
 wp kirjasto folders list             # The folder tree with file counts
 wp kirjasto folders import           # Which plugins have folders to import
 wp kirjasto folders import filebird  # Import them
+wp kirjasto replace 123 ~/new.jpg    # Replace the file of attachment 123
 ```
 
 ## Filters
 
-- `jcore_kirjasto_features` – the features to load. Remove `usage` or `folders` to turn one off.
+- `jcore_kirjasto_features` – the features to load. Remove `usage`, `folders` or `replace` to turn one off.
 - `jcore_kirjasto_folders_capability` – who may create, rename, move and delete folders. Default `upload_files`; moving a file needs the right to edit it.
 - `jcore_kirjasto_post_types` – the post types that are indexed.
 - `jcore_kirjasto_block_attributes` – block attributes holding attachment IDs, by block name.
@@ -145,6 +167,8 @@ wp kirjasto folders import filebird  # Import them
 - `jcore_kirjasto_options_prefixes` – ACF options page prefixes, besides the ones ACF reports.
 - `jcore_kirjasto_theme_files` – the theme files that are scanned, keyed by absolute path.
 - `jcore_kirjasto_post_references`, `jcore_kirjasto_term_references`, `jcore_kirjasto_settings_references`, `jcore_kirjasto_theme_references` – the final reference lists.
+- `jcore_kirjasto_replace_derived_files` – copies kept beside a file that are deleted when it is replaced. Default `{file}.webp` and `{file}.avif`.
+- `jcore_kirjasto_replaced` (action) – after a file has been replaced, with the attachment ID, its old metadata, the rewritten URLs and the attachments sharing the file.
 
 ## Releasing
 

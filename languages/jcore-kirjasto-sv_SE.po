@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JCORE Kirjasto 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jcore-kirjasto\n"
+"POT-Creation-Date: 2026-10-19T11:26:09+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-05T09:09:58+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: jcore-kirjasto\n"
@@ -39,36 +39,119 @@ msgstr ""
 msgid "https://jco.fi"
 msgstr ""
 
+#: includes/folders/admin/class-media-library.php:140 build/folders.js:12
+msgid "No folder"
+msgstr "Ingen mapp"
+
+#: includes/folders/admin/class-media-library.php:144
+#: includes/folders/class-folders.php:46
+msgid "Folder"
+msgstr "Mapp"
+
+#: includes/folders/admin/class-media-library.php:206
+msgid "Move to folder"
+msgstr "Flytta till mapp"
+
+#. translators: %d: number of files moved.
+#: includes/folders/admin/class-media-library.php:278
+#, php-format
+msgid "%d file moved."
+msgid_plural "%d files moved."
+msgstr[0] "%d fil flyttad."
+msgstr[1] "%d filer flyttade."
+
+#: includes/folders/class-folders.php:45 build/folders.js:12
+msgid "Folders"
+msgstr "Mappar"
+
+#: includes/folders/class-folders.php:146
+#: includes/folders/class-folders.php:177
+msgid "A folder needs a name."
+msgstr "En mapp behöver ett namn."
+
+#: includes/folders/class-folders.php:188
+msgid "A folder cannot be moved into itself."
+msgstr "En mapp kan inte flyttas in i sig själv."
+
+#: includes/folders/class-folders.php:386
+msgid "The folder does not exist."
+msgstr "Mappen finns inte."
+
+#: includes/folders/class-folders.php:399
+msgid "There is already a folder with this name here."
+msgstr "Här finns redan en mapp med det namnet."
+
+#: includes/folders/class-importer.php:91
+msgid "Folders cannot be imported from this source."
+msgstr "Mappar kan inte importeras från den här källan."
+
+#: includes/folders/class-importer.php:218
+msgid "Untitled folder"
+msgstr "Namnlös mapp"
+
+#: includes/folders/rest/class-folders-controller.php:226
+msgid "You are not allowed to move these files."
+msgstr "Du får inte flytta de här filerna."
+
+#: includes/replace/admin/class-media-library.php:65
+#: includes/replace/admin/class-media-library.php:154
+msgid "Replace file"
+msgstr "Ersätt fil"
+
+#. translators: %s: file type, e.g. JPG.
+#: includes/replace/admin/class-media-library.php:72
+#, php-format
+msgid "Upload a new %s file in place of this one. It keeps the address of this file, so it changes everywhere this file is used."
+msgstr "Ladda upp en ny %s-fil i stället för den här. Den får den här filens adress, så den byts ut överallt där filen används."
+
+#: includes/replace/class-replacer.php:89
+#: includes/replace/rest/class-replace-controller.php:80
+msgid "The file to replace was not found."
+msgstr "Filen som ska ersättas hittades inte."
+
+#: includes/replace/class-replacer.php:93
+msgid "The new file is empty."
+msgstr "Den nya filen är tom."
+
+#. translators: %s: file type, e.g. JPG.
+#: includes/replace/class-replacer.php:102
+#, php-format
+msgid "The new file must be of the same type as the one it replaces: %s."
+msgstr "Den nya filen måste vara av samma typ som filen den ersätter: %s."
+
+#: includes/replace/class-replacer.php:121
+msgid "The new file could not be moved into place."
+msgstr "Den nya filen kunde inte flyttas på plats."
+
+#: includes/replace/rest/class-replace-controller.php:84
+msgid "No file was uploaded."
+msgstr "Ingen fil laddades upp."
+
 #: includes/usage/admin/class-media-library.php:73
 #: includes/usage/admin/class-media-library.php:78
 #: includes/usage/admin/class-media-library.php:112
 msgid "Used in"
 msgstr "Används i"
 
-#: includes/usage/admin/class-media-library.php:137
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:137 build/usage-media.js:1
 msgid "All usage"
 msgstr "All användning"
 
-#: includes/usage/admin/class-media-library.php:138
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:138 build/usage-media.js:1
 #: build/usage-page.js:3
 msgid "Used"
 msgstr "Används"
 
-#: includes/usage/admin/class-media-library.php:139
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:139 build/usage-media.js:1
 #: build/usage-page.js:3
 msgid "Not used"
 msgstr "Används inte"
 
-#: includes/usage/admin/class-media-library.php:145
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:145 build/usage-media.js:1
 msgid "Filter by usage"
 msgstr "Filtrera efter användning"
 
-#: includes/usage/admin/class-page.php:62
-#: build/usage-page.js:1
+#: includes/usage/admin/class-page.php:62 build/usage-page.js:1
 msgid "Media Usage"
 msgstr "Mediaanvändning"
 
@@ -76,8 +159,7 @@ msgstr "Mediaanvändning"
 msgid "Usage"
 msgstr "Användning"
 
-#: includes/usage/class-feature.php:60
-#: build/usage-page.js:1
+#: includes/usage/class-feature.php:60 build/usage-page.js:1
 msgid "Usage index"
 msgstr "Användningsindex"
 
@@ -109,13 +191,13 @@ msgstr[1] "Används även i %d objekt som du inte har åtkomst till."
 msgid "(no title)"
 msgstr "(ingen rubrik)"
 
-#: includes/usage/class-report.php:370
-msgid "Settings"
-msgstr "Inställningar"
-
 #: includes/usage/class-report.php:355
 msgid "Theme"
 msgstr "Tema"
+
+#: includes/usage/class-report.php:370
+msgid "Settings"
+msgstr "Inställningar"
 
 #: includes/usage/class-report.php:375
 msgid "Yoast SEO"
@@ -161,6 +243,153 @@ msgstr "X-bild"
 msgid "Thumbnail"
 msgstr "Miniatyrbild"
 
+#. translators: %d: number of files being dragged.
+#: build/folders.js:2
+msgid "Move %d file"
+msgid_plural "Move %d files"
+msgstr[0] "Flytta %d fil"
+msgstr[1] "Flytta %d filer"
+
+#: build/folders.js:2
+msgid "New folder name"
+msgstr "Namn på den nya mappen"
+
+#. translators: 1: folder name, 2: name of its parent folder.
+#: build/folders.js:3
+msgid "Delete “%1$s”? Its files and subfolders move to “%2$s”."
+msgstr "Radera ”%1$s”? Dess filer och undermappar flyttas till ”%2$s”."
+
+#. translators: %s: folder name.
+#: build/folders.js:4
+msgid "Delete “%s”? Its subfolders move to the top level and its files are left without a folder."
+msgstr "Radera ”%s”? Dess undermappar flyttas till översta nivån och dess filer blir utan mapp."
+
+#: build/folders.js:4 build/folders.js:7
+msgid "Delete"
+msgstr "Radera"
+
+#: build/folders.js:4
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. translators: %s: folder name.
+#: build/folders.js:5
+msgid "Expand %s"
+msgstr "Expandera %s"
+
+#. translators: %s: folder name.
+#: build/folders.js:6
+msgid "Collapse %s"
+msgstr "Fäll ihop %s"
+
+#: build/folders.js:6
+msgid "Folder name"
+msgstr "Mappens namn"
+
+#. translators: %s: folder name.
+#: build/folders.js:7
+msgid "Actions for %s"
+msgstr "Åtgärder för %s"
+
+#: build/folders.js:7 build/folders.js:12
+msgid "New subfolder"
+msgstr "Ny undermapp"
+
+#: build/folders.js:7
+msgid "Rename"
+msgstr "Byt namn"
+
+#. translators: 1: plugin name, 2: "25 folders", 3: "279 files".
+#: build/folders.js:8
+msgid "%1$s has %2$s with %3$s."
+msgstr "%1$s har %2$s med %3$s."
+
+#. translators: %s: number of folders.
+#: build/folders.js:9
+msgid "%s folder"
+msgid_plural "%s folders"
+msgstr[0] "%s mapp"
+msgstr[1] "%s mappar"
+
+#. translators: %s: number of files.
+#: build/folders.js:10
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s fil"
+msgstr[1] "%s filer"
+
+#. translators: 1: files handled so far, 2: all files.
+#: build/folders.js:11
+msgid "%1$s of %2$s files"
+msgstr "%1$s av %2$s filer"
+
+#. translators: 1: number of folders, 2: plugin name.
+#: build/folders.js:12
+msgid "Imported %1$s folder from %2$s."
+msgid_plural "Imported %1$s folders from %2$s."
+msgstr[0] "%1$s mapp importerades från %2$s."
+msgstr[1] "%1$s mappar importerades från %2$s."
+
+#: build/folders.js:12
+msgid "The folders could not be imported."
+msgstr "Mapparna kunde inte importeras."
+
+#: build/folders.js:12
+msgid "Import folders"
+msgstr "Importera mappar"
+
+#: build/folders.js:12
+msgid "Not now"
+msgstr "Inte nu"
+
+#: build/folders.js:12
+msgid "The folders could not be saved."
+msgstr "Mapparna kunde inte sparas."
+
+#: build/folders.js:12
+msgid "New folder"
+msgstr "Ny mapp"
+
+#: build/folders.js:12
+msgid "Hide folders"
+msgstr "Dölj mappar"
+
+#: build/folders.js:12
+msgid "All files"
+msgstr "Alla filer"
+
+#: build/folders.js:12
+msgid "Move to the top level"
+msgstr "Flytta till översta nivån"
+
+#: build/folders.js:12
+msgid "No folders yet. Create one with the + button, then drag files onto it."
+msgstr "Inga mappar ännu. Skapa en med knappen +, och dra sedan filer till den."
+
+#: build/folders.js:12
+msgid "No folders yet."
+msgstr "Inga mappar ännu."
+
+#: build/folders.js:12
+msgid "Show folders"
+msgstr "Visa mappar"
+
+#: build/folders.js:12
+msgid "Folder to move the files to"
+msgstr "Mapp som filerna flyttas till"
+
+#: build/replace.js:1
+msgid "Replacing…"
+msgstr "Ersätter…"
+
+#: build/replace.js:1
+msgid "The file was replaced."
+msgstr "Filen ersattes."
+
+#: build/replace.js:1
+msgid "The file could not be replaced."
+msgstr "Filen kunde inte ersättas."
+
 #: build/usage-page.js:1
 msgid "Indexing failed."
 msgstr "Indexeringen misslyckades."
@@ -175,7 +404,6 @@ msgstr "Varje inlägg, sida, mönster, mall, term och ACF-alternativsida genoms�
 
 #. translators: %s: date and time
 #: build/usage-page.js:2
-#, js-format
 msgid "Last built %s. Changes to content are indexed as they are saved."
 msgstr "Senast byggt %s. Ändringar i innehållet indexeras när de sparas."
 
@@ -185,7 +413,6 @@ msgstr "Indexet har inte byggts ännu. Tills dess kan filer visas som oanvända 
 
 #. translators: 1: items scanned so far, 2: items in total
 #: build/usage-page.js:3
-#, js-format
 msgid "%1$s of %2$s items scanned"
 msgstr "%1$s av %2$s objekt genomsökta"
 
@@ -216,207 +443,3 @@ msgstr "Filer"
 #: build/usage-page.js:3
 msgid "References"
 msgstr "Referenser"
-
-#: includes/folders/admin/class-media-library.php:140
-#: build/folders.js:12
-msgid "No folder"
-msgstr "Ingen mapp"
-
-#: includes/folders/admin/class-media-library.php:144
-#: includes/folders/class-folders.php:46
-msgid "Folder"
-msgstr "Mapp"
-
-#: includes/folders/admin/class-media-library.php:206
-msgid "Move to folder"
-msgstr "Flytta till mapp"
-
-#. translators: %d: number of files moved.
-#: includes/folders/admin/class-media-library.php:278
-#, php-format
-msgid "%d file moved."
-msgid_plural "%d files moved."
-msgstr[0] "%d fil flyttad."
-msgstr[1] "%d filer flyttade."
-
-#: includes/folders/class-folders.php:45
-#: build/folders.js:12
-msgid "Folders"
-msgstr "Mappar"
-
-#: includes/folders/class-folders.php:146
-#: includes/folders/class-folders.php:177
-msgid "A folder needs a name."
-msgstr "En mapp behöver ett namn."
-
-#: includes/folders/class-folders.php:188
-msgid "A folder cannot be moved into itself."
-msgstr "En mapp kan inte flyttas in i sig själv."
-
-#: includes/folders/class-folders.php:386
-msgid "The folder does not exist."
-msgstr "Mappen finns inte."
-
-#: includes/folders/class-folders.php:399
-msgid "There is already a folder with this name here."
-msgstr "Här finns redan en mapp med det namnet."
-
-#: includes/folders/class-importer.php:91
-msgid "Folders cannot be imported from this source."
-msgstr "Mappar kan inte importeras från den här källan."
-
-#: includes/folders/class-importer.php:218
-msgid "Untitled folder"
-msgstr "Namnlös mapp"
-
-#: includes/folders/rest/class-folders-controller.php:226
-msgid "You are not allowed to move these files."
-msgstr "Du får inte flytta de här filerna."
-
-#. translators: %d: number of files being dragged.
-#: build/folders.js:2
-#, js-format
-msgid "Move %d file"
-msgid_plural "Move %d files"
-msgstr[0] "Flytta %d fil"
-msgstr[1] "Flytta %d filer"
-
-#: build/folders.js:2
-msgid "New folder name"
-msgstr "Namn på den nya mappen"
-
-#. translators: 1: folder name, 2: name of its parent folder.
-#: build/folders.js:3
-#, js-format
-msgid "Delete “%1$s”? Its files and subfolders move to “%2$s”."
-msgstr "Radera ”%1$s”? Dess filer och undermappar flyttas till ”%2$s”."
-
-#. translators: %s: folder name.
-#: build/folders.js:4
-#, js-format
-msgid "Delete “%s”? Its subfolders move to the top level and its files are left without a folder."
-msgstr "Radera ”%s”? Dess undermappar flyttas till översta nivån och dess filer blir utan mapp."
-
-#: build/folders.js:4
-#: build/folders.js:7
-msgid "Delete"
-msgstr "Radera"
-
-#: build/folders.js:4
-msgid "Cancel"
-msgstr "Avbryt"
-
-#. translators: %s: folder name.
-#: build/folders.js:5
-#, js-format
-msgid "Expand %s"
-msgstr "Expandera %s"
-
-#. translators: %s: folder name.
-#: build/folders.js:6
-#, js-format
-msgid "Collapse %s"
-msgstr "Fäll ihop %s"
-
-#: build/folders.js:6
-msgid "Folder name"
-msgstr "Mappens namn"
-
-#. translators: %s: folder name.
-#: build/folders.js:7
-#, js-format
-msgid "Actions for %s"
-msgstr "Åtgärder för %s"
-
-#: build/folders.js:7
-#: build/folders.js:12
-msgid "New subfolder"
-msgstr "Ny undermapp"
-
-#: build/folders.js:7
-msgid "Rename"
-msgstr "Byt namn"
-
-#. translators: 1: plugin name, 2: "25 folders", 3: "279 files".
-#: build/folders.js:8
-#, js-format
-msgid "%1$s has %2$s with %3$s."
-msgstr "%1$s har %2$s med %3$s."
-
-#. translators: %s: number of folders.
-#: build/folders.js:9
-#, js-format
-msgid "%s folder"
-msgid_plural "%s folders"
-msgstr[0] "%s mapp"
-msgstr[1] "%s mappar"
-
-#. translators: %s: number of files.
-#: build/folders.js:10
-#, js-format
-msgid "%s file"
-msgid_plural "%s files"
-msgstr[0] "%s fil"
-msgstr[1] "%s filer"
-
-#. translators: 1: files handled so far, 2: all files.
-#: build/folders.js:11
-#, js-format
-msgid "%1$s of %2$s files"
-msgstr "%1$s av %2$s filer"
-
-#. translators: 1: number of folders, 2: plugin name.
-#: build/folders.js:12
-#, js-format
-msgid "Imported %1$s folder from %2$s."
-msgid_plural "Imported %1$s folders from %2$s."
-msgstr[0] "%1$s mapp importerades från %2$s."
-msgstr[1] "%1$s mappar importerades från %2$s."
-
-#: build/folders.js:12
-msgid "The folders could not be imported."
-msgstr "Mapparna kunde inte importeras."
-
-#: build/folders.js:12
-msgid "Import folders"
-msgstr "Importera mappar"
-
-#: build/folders.js:12
-msgid "Not now"
-msgstr "Inte nu"
-
-#: build/folders.js:12
-msgid "The folders could not be saved."
-msgstr "Mapparna kunde inte sparas."
-
-#: build/folders.js:12
-msgid "New folder"
-msgstr "Ny mapp"
-
-#: build/folders.js:12
-msgid "All files"
-msgstr "Alla filer"
-
-#: build/folders.js:12
-msgid "Move to the top level"
-msgstr "Flytta till översta nivån"
-
-#: build/folders.js:12
-msgid "No folders yet. Create one with the + button, then drag files onto it."
-msgstr "Inga mappar ännu. Skapa en med knappen +, och dra sedan filer till den."
-
-#: build/folders.js:12
-msgid "No folders yet."
-msgstr "Inga mappar ännu."
-
-#: build/folders.js:12
-msgid "Folder to move the files to"
-msgstr "Mapp som filerna flyttas till"
-
-#: build/folders.js:12
-msgid "Hide folders"
-msgstr "Dölj mappar"
-
-#: build/folders.js:12
-msgid "Show folders"
-msgstr "Visa mappar"
