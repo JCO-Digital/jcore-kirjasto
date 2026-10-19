@@ -61,9 +61,10 @@ final class Plugin {
 	 */
 	public static function features(): array {
 		$features = array(
-			'usage'   => Usage\Feature::class,
-			'folders' => Folders\Feature::class,
-			'replace' => Replace\Feature::class,
+			'usage'      => Usage\Feature::class,
+			'folders'    => Folders\Feature::class,
+			'replace'    => Replace\Feature::class,
+			'duplicates' => Duplicates\Feature::class,
 		);
 
 		/**

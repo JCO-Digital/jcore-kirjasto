@@ -7,6 +7,8 @@
 
 namespace Jcore\Kirjasto\Replace;
 
+use Jcore\Kirjasto\Attachment_Files;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -123,7 +125,7 @@ final class Replacer {
 		$old_file = (string) get_attached_file( $attachment_id, true );
 		$old_meta = wp_get_attachment_metadata( $attachment_id, true );
 		$old_meta = is_array( $old_meta ) ? $old_meta : array();
-		$old_urls = self::urls( $old_file, $old_meta );
+		$old_urls = Attachment_Files::urls( $old_file, $old_meta );
 		$sharing  = self::sharing( $attachment_id );
 
 		// The original upload, not the `-scaled` copy WordPress may have made of
@@ -174,7 +176,7 @@ final class Replacer {
 			self::touch( $id );
 		}
 
-		$map = self::url_map( $old_urls, self::urls( $new_file, $new_meta ), wp_attachment_is_image( $attachment_id ) );
+		$map = Attachment_Files::url_map( $old_urls, Attachment_Files::urls( $new_file, $new_meta ), wp_attachment_is_image( $attachment_id ) );
 		self::rewrite_content( $map );
 
 		/**
@@ -256,61 +258,6 @@ final class Replacer {
 	}
 
 	/**
-	 * The URL of each file of an attachment, relative to the uploads directory:
-	 * content may link to them on any domain. Keyed `file` for the attached
-	 * file, `original` for the upload it was scaled from and `size:{name}` for
-	 * the resized copies; a PDF's preview, for one, is a size named `full`.
-	 *
-	 * @param string               $file Attached file.
-	 * @param array<string, mixed> $meta Metadata.
-	 *
-	 * @return array<string, string>
-	 */
-	private static function urls( string $file, array $meta ): array {
-		$base = _wp_relative_upload_path( $file );
-		$dir  = dirname( $base );
-		$dir  = '.' === $dir ? '' : trailingslashit( $dir );
-		$urls = array( 'file' => $base );
-
-		if ( ! empty( $meta['original_image'] ) ) {
-			$urls['original'] = $dir . wp_basename( $meta['original_image'] );
-		}
-
-		foreach ( is_array( $meta['sizes'] ?? null ) ? $meta['sizes'] : array() as $size => $data ) {
-			if ( is_array( $data ) && ! empty( $data['file'] ) ) {
-				$urls[ 'size:' . $size ] = $dir . wp_basename( $data['file'] );
-			}
-		}
-
-		return $urls;
-	}
-
-	/**
-	 * Maps the old URLs that are gone to their replacements: the same size, or
-	 * for an image the attached file, when the new image is too small for it.
-	 *
-	 * @param array<string, string> $old_urls Old URLs, keyed as urls() keys them.
-	 * @param array<string, string> $new_urls New URLs, keyed the same way.
-	 * @param bool                  $is_image Whether the attachment is an image.
-	 *
-	 * @return array<string, string>
-	 */
-	private static function url_map( array $old_urls, array $new_urls, bool $is_image ): array {
-		$map = array();
-
-		foreach ( $old_urls as $key => $url ) {
-			$replacement = $new_urls[ $key ] ?? ( 'original' === $key ? $new_urls['file'] : null );
-			$replacement = $replacement ?? ( $is_image ? $new_urls['file'] : null );
-
-			if ( null !== $replacement && $replacement !== $url && ! in_array( $url, $new_urls, true ) ) {
-				$map[ $url ] = $replacement;
-			}
-		}
-
-		return $map;
-	}
-
-	/**
 	 * Points post content linking to the old copies at the new ones.
 	 *
 	 * The content is written directly, without a revision or a new modified
@@ -327,14 +274,6 @@ final class Replacer {
 			return;
 		}
 
-		// Links with a leading slash, so `photo.jpg` does not match `my-photo.jpg`,
-		// and their JSON-escaped form.
-		$pairs = array();
-		foreach ( $map as $old => $new ) {
-			$pairs[ '/' . $old ]                              = '/' . $new;
-			$pairs[ '\\/' . str_replace( '/', '\\/', $old ) ] = '\\/' . str_replace( '/', '\\/', $new );
-		}
-
 		$likes = array();
 		foreach ( array_keys( $map ) as $old ) {
 			$likes[] = $wpdb->prepare( 'post_content LIKE %s', '%' . $wpdb->esc_like( wp_basename( $old ) ) . '%' );
@@ -344,7 +283,7 @@ final class Replacer {
 		$posts = $wpdb->get_results( "SELECT ID, post_content FROM {$wpdb->posts} WHERE post_type <> 'revision' AND (" . implode( ' OR ', $likes ) . ')' );
 
 		foreach ( $posts as $post ) {
-			$content = strtr( $post->post_content, $pairs );
+			$content = Attachment_Files::rewrite_urls( $post->post_content, $map );
 
 			if ( $content !== $post->post_content ) {
 				$wpdb->update( $wpdb->posts, array( 'post_content' => $content ), array( 'ID' => $post->ID ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery

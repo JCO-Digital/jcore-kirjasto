@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JCORE Kirjasto 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jcore-kirjasto\n"
-"POT-Creation-Date: 2026-10-19T11:26:09+00:00\n"
+"POT-Creation-Date: 2026-10-19T14:23:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,12 +39,54 @@ msgstr ""
 msgid "https://jco.fi"
 msgstr ""
 
+#: includes/duplicates/admin/class-media-library.php:78
+msgid "The same file is also in the library as:"
+msgid_plural "The same file is also in the library as:"
+msgstr[0] "Samma fil finns också i biblioteket som:"
+msgstr[1] "Samma fil finns också i biblioteket som:"
+
+#: includes/duplicates/admin/class-media-library.php:79
+msgid "An image that looks the same is also in the library:"
+msgid_plural "Images that look the same are also in the library:"
+msgstr[0] "En bild som ser likadan ut finns också i biblioteket:"
+msgstr[1] "Bilder som ser likadana ut finns också i biblioteket:"
+
+#: includes/duplicates/admin/class-media-library.php:84
+msgid "Review duplicates"
+msgstr "Granska dubbletter"
+
+#: includes/duplicates/admin/class-media-library.php:88
+#: includes/duplicates/admin/class-page.php:68
+msgid "Duplicates"
+msgstr "Dubbletter"
+
+#: includes/duplicates/admin/class-page.php:67 build/duplicates-page.js:8
+msgid "Duplicate Media"
+msgstr "Dubbletter i mediabiblioteket"
+
+#: includes/duplicates/class-merger.php:43
+msgid "Duplicates can only be merged or deleted with the usage index turned on."
+msgstr "Dubbletter kan bara slås ihop eller raderas när användningsindexet är påslaget."
+
+#: includes/duplicates/class-merger.php:47
+msgid "The usage index is being built. Duplicates can be merged or deleted once it is done."
+msgstr "Användningsindexet byggs. Dubbletter kan slås ihop eller raderas när det är klart."
+
+#: includes/duplicates/class-merger.php:72
+#: includes/duplicates/class-merger.php:86
+msgid "These files are no longer duplicates of each other."
+msgstr "Filerna är inte längre dubbletter av varandra."
+
+#: includes/duplicates/rest/class-duplicates-controller.php:285
+msgid "The file was not found."
+msgstr "Filen hittades inte."
+
 #: includes/folders/admin/class-media-library.php:140 build/folders.js:12
 msgid "No folder"
 msgstr "Ingen mapp"
 
 #: includes/folders/admin/class-media-library.php:144
-#: includes/folders/class-folders.php:46
+#: includes/folders/class-folders.php:46 build/duplicates-page.js:4
 msgid "Folder"
 msgstr "Mapp"
 
@@ -64,20 +106,20 @@ msgstr[1] "%d filer flyttade."
 msgid "Folders"
 msgstr "Mappar"
 
-#: includes/folders/class-folders.php:146
-#: includes/folders/class-folders.php:177
+#: includes/folders/class-folders.php:151
+#: includes/folders/class-folders.php:182
 msgid "A folder needs a name."
 msgstr "En mapp behöver ett namn."
 
-#: includes/folders/class-folders.php:188
+#: includes/folders/class-folders.php:193
 msgid "A folder cannot be moved into itself."
 msgstr "En mapp kan inte flyttas in i sig själv."
 
-#: includes/folders/class-folders.php:386
+#: includes/folders/class-folders.php:381
 msgid "The folder does not exist."
 msgstr "Mappen finns inte."
 
-#: includes/folders/class-folders.php:399
+#: includes/folders/class-folders.php:394
 msgid "There is already a folder with this name here."
 msgstr "Här finns redan en mapp med det namnet."
 
@@ -93,33 +135,33 @@ msgstr "Namnlös mapp"
 msgid "You are not allowed to move these files."
 msgstr "Du får inte flytta de här filerna."
 
-#: includes/replace/admin/class-media-library.php:65
-#: includes/replace/admin/class-media-library.php:154
+#: includes/replace/admin/class-media-library.php:146
+#: includes/replace/admin/class-media-library.php:248
 msgid "Replace file"
 msgstr "Ersätt fil"
 
 #. translators: %s: file type, e.g. JPG.
-#: includes/replace/admin/class-media-library.php:72
+#: includes/replace/admin/class-media-library.php:153
 #, php-format
 msgid "Upload a new %s file in place of this one. It keeps the address of this file, so it changes everywhere this file is used."
 msgstr "Ladda upp en ny %s-fil i stället för den här. Den får den här filens adress, så den byts ut överallt där filen används."
 
-#: includes/replace/class-replacer.php:89
+#: includes/replace/class-replacer.php:105
 #: includes/replace/rest/class-replace-controller.php:80
 msgid "The file to replace was not found."
 msgstr "Filen som ska ersättas hittades inte."
 
-#: includes/replace/class-replacer.php:93
+#: includes/replace/class-replacer.php:109
 msgid "The new file is empty."
 msgstr "Den nya filen är tom."
 
 #. translators: %s: file type, e.g. JPG.
-#: includes/replace/class-replacer.php:102
+#: includes/replace/class-replacer.php:118
 #, php-format
 msgid "The new file must be of the same type as the one it replaces: %s."
 msgstr "Den nya filen måste vara av samma typ som filen den ersätter: %s."
 
-#: includes/replace/class-replacer.php:121
+#: includes/replace/class-replacer.php:137
 msgid "The new file could not be moved into place."
 msgstr "Den nya filen kunde inte flyttas på plats."
 
@@ -167,7 +209,7 @@ msgstr "Användningsindex"
 msgid "The usage index is still being built, so this list may be incomplete."
 msgstr "Användningsindexet byggs fortfarande, så listan kan vara ofullständig."
 
-#: includes/usage/class-report.php:142
+#: includes/usage/class-report.php:142 build/duplicates-page.js:3
 msgid "Not used anywhere"
 msgstr "Används inte någonstans"
 
@@ -243,6 +285,262 @@ msgstr "X-bild"
 msgid "Thumbnail"
 msgstr "Miniatyrbild"
 
+#. translators: %d: number of places a file is used in.
+#: build/duplicates-page.js:2
+msgid "Used in %d place"
+msgid_plural "Used in %d places"
+msgstr[0] "Används på %d ställe"
+msgstr[1] "Används på %d ställen"
+
+#. translators: %d: number of places the current user may not see.
+#: build/duplicates-page.js:3
+msgid "%d item you do not have access to"
+msgid_plural "%d items you do not have access to"
+msgstr[0] "%d objekt du inte har åtkomst till"
+msgstr[1] "%d objekt du inte har åtkomst till"
+
+#: build/duplicates-page.js:3
+msgid "Keep this one"
+msgstr "Behåll den här"
+
+#: build/duplicates-page.js:3
+msgid "Suggested"
+msgstr "Förslag"
+
+#: build/duplicates-page.js:3
+msgid "File"
+msgstr "Fil"
+
+#: build/duplicates-page.js:3
+msgid "Dimensions"
+msgstr "Mått"
+
+#. translators: 1: width, 2: height, both in pixels.
+#: build/duplicates-page.js:4 build/duplicates-upload.js:2
+msgid "%1$d × %2$d"
+msgstr "%1$d × %2$d"
+
+#: build/duplicates-page.js:4
+msgid "Size"
+msgstr "Storlek"
+
+#: build/duplicates-page.js:4
+msgid "Uploaded"
+msgstr "Uppladdad"
+
+#: build/duplicates-page.js:4
+msgid "Languages"
+msgstr "Språk"
+
+#: build/duplicates-page.js:4
+msgid "Remove the duplicates?"
+msgstr "Ta bort dubbletterna?"
+
+#. translators: 1: number of files, 2: title of the file that is kept.
+#: build/duplicates-page.js:5
+msgid "%1$d file will be deleted, and “%2$s” kept."
+msgid_plural "%1$d files will be deleted, and “%2$s” kept."
+msgstr[0] "%1$d fil raderas och ”%2$s” behålls."
+msgstr[1] "%1$d filer raderas och ”%2$s” behålls."
+
+#. translators: %d: number of places.
+#: build/duplicates-page.js:6
+msgid "%d place will be changed to use the kept file."
+msgid_plural "%d places will be changed to use the kept file."
+msgstr[0] "%d ställe ändras till att använda filen som behålls."
+msgstr[1] "%d ställen ändras till att använda filen som behålls."
+
+#: build/duplicates-page.js:6
+msgid "A file still used where it cannot be changed, such as in theme code, is kept."
+msgstr "En fil som fortfarande används där den inte kan ändras, till exempel i temats kod, behålls."
+
+#: build/duplicates-page.js:6 build/folders.js:4
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: build/duplicates-page.js:6
+msgid "Remove duplicates"
+msgstr "Ta bort dubbletter"
+
+#: build/duplicates-page.js:6
+msgid "Something went wrong."
+msgstr "Något gick fel."
+
+#: build/duplicates-page.js:6 build/duplicates-page.js:10
+msgid "Identical files"
+msgstr "Identiska filer"
+
+#: build/duplicates-page.js:6 build/duplicates-page.js:10
+msgid "Images that look the same"
+msgstr "Bilder som ser likadana ut"
+
+#: build/duplicates-page.js:6
+msgid "Compare them before removing any: these can differ in size, quality or small details."
+msgstr "Jämför dem innan du tar bort någon: de kan skilja sig i storlek, kvalitet eller små detaljer."
+
+#: build/duplicates-page.js:6
+msgid "Keep the selected file, remove the others"
+msgstr "Behåll den valda filen, ta bort de andra"
+
+#: build/duplicates-page.js:6
+msgid "Not duplicates"
+msgstr "Inte dubbletter"
+
+#: build/duplicates-page.js:6
+msgid "Scanning failed."
+msgstr "Sökningen misslyckades."
+
+#: build/duplicates-page.js:6
+msgid "Failed to load the duplicates."
+msgstr "Det gick inte att läsa in dubbletterna."
+
+#. translators: %d: number of files.
+#: build/duplicates-page.js:7
+msgid "%d duplicate removed."
+msgid_plural "%d duplicates removed."
+msgstr[0] "%d dubblett borttagen."
+msgstr[1] "%d dubbletter borttagna."
+
+#. translators: %d: number of files.
+#: build/duplicates-page.js:8
+msgid "%d file is still used where it could not be changed, so it was kept."
+msgid_plural "%d files are still used where they could not be changed, so they were kept."
+msgstr[0] "%d fil används fortfarande där den inte kunde ändras, så den behölls."
+msgstr[1] "%d filer används fortfarande där de inte kunde ändras, så de behölls."
+
+#: build/duplicates-page.js:8
+msgid "The files will no longer be listed as duplicates."
+msgstr "Filerna visas inte längre som dubbletter."
+
+#: build/duplicates-page.js:8
+msgid "Files uploaded more than once, and images that look the same though they were resized, recompressed or saved in another format. Keep one, and everything that used the others is changed to use it."
+msgstr "Filer som laddats upp mer än en gång, och bilder som ser likadana ut fast de skalats om, komprimerats om eller sparats i ett annat format. Behåll en, så ändras allt som använde de andra till att använda den."
+
+#: build/duplicates-page.js:8
+msgid "Scan"
+msgstr "Sökning"
+
+#. translators: %s: date and time
+#: build/duplicates-page.js:9
+msgid "Last scanned %s. New uploads are checked as they are added."
+msgstr "Senast genomsökt %s. Nya uppladdningar kontrolleras när de läggs till."
+
+#: build/duplicates-page.js:9
+msgid "The media library has not been scanned yet."
+msgstr "Mediabiblioteket har inte genomsökts ännu."
+
+#. translators: 1: files scanned so far, 2: files in total
+#: build/duplicates-page.js:10
+msgid "%1$s of %2$s files scanned"
+msgstr "%1$s av %2$s filer genomsökta"
+
+#: build/duplicates-page.js:10
+msgid "Failed to start the scan."
+msgstr "Det gick inte att starta sökningen."
+
+#: build/duplicates-page.js:10
+msgid "Scanning…"
+msgstr "Söker…"
+
+#: build/duplicates-page.js:10
+msgid "Scan again"
+msgstr "Sök igen"
+
+#: build/duplicates-page.js:10
+msgid "Only files that changed are read again."
+msgstr "Bara filer som ändrats läses igen."
+
+#: build/duplicates-page.js:10
+msgid "Files scanned"
+msgstr "Genomsökta filer"
+
+#: build/duplicates-page.js:10
+msgid "Groups of identical files"
+msgstr "Grupper av identiska filer"
+
+#: build/duplicates-page.js:10
+msgid "Groups of images that look the same"
+msgstr "Grupper av bilder som ser likadana ut"
+
+#: build/duplicates-page.js:10
+msgid "Files missing on disk"
+msgstr "Filer som saknas på disken"
+
+#: build/duplicates-page.js:10
+msgid "Attachments whose file is not on this server cannot be compared. On a development copy that loads its media from the live site, most files may be missing."
+msgstr "Bilagor vars fil inte finns på den här servern kan inte jämföras. På en utvecklingskopia som hämtar sina medier från den publika webbplatsen kan de flesta filer saknas."
+
+#: build/duplicates-page.js:10
+msgid "Show"
+msgstr "Visa"
+
+#: build/duplicates-page.js:10
+msgid "All duplicates"
+msgstr "Alla dubbletter"
+
+#. translators: %s: number of groups.
+#: build/duplicates-page.js:11
+msgid "%s group"
+msgid_plural "%s groups"
+msgstr[0] "%s grupp"
+msgstr[1] "%s grupper"
+
+#: build/duplicates-page.js:11
+msgid "No duplicates found."
+msgstr "Inga dubbletter hittades."
+
+#: build/duplicates-page.js:11
+msgid "Previous"
+msgstr "Föregående"
+
+#. translators: 1: current page, 2: number of pages.
+#: build/duplicates-page.js:12
+msgid "Page %1$d of %2$d"
+msgstr "Sida %1$d av %2$d"
+
+#: build/duplicates-page.js:12
+msgid "Next"
+msgstr "Nästa"
+
+#: build/duplicates-upload.js:1
+msgid "The same file is already in the library:"
+msgstr "Samma fil finns redan i biblioteket:"
+
+#: build/duplicates-upload.js:1
+msgid "An image that looks the same is already in the library:"
+msgstr "En bild som ser likadan ut finns redan i biblioteket:"
+
+#: build/duplicates-upload.js:2
+msgid "Use the file in the library"
+msgstr "Använd filen i biblioteket"
+
+#: build/duplicates-upload.js:2
+msgid "Skip this file"
+msgstr "Hoppa över den här filen"
+
+#: build/duplicates-upload.js:2
+msgid "Upload anyway"
+msgstr "Ladda upp ändå"
+
+#: build/duplicates-upload.js:2
+msgid "This file is already in the media library"
+msgid_plural "These files are already in the media library"
+msgstr[0] "Den här filen finns redan i mediabiblioteket"
+msgstr[1] "De här filerna finns redan i mediabiblioteket"
+
+#. translators: %s: file name.
+#: build/duplicates-upload.js:3
+msgid "What to do with %s"
+msgstr "Vad ska göras med %s"
+
+#: build/duplicates-upload.js:3
+msgid "Review all duplicates"
+msgstr "Granska alla dubbletter"
+
+#: build/duplicates-upload.js:3
+msgid "Continue"
+msgstr "Fortsätt"
+
 #. translators: %d: number of files being dragged.
 #: build/folders.js:2
 msgid "Move %d file"
@@ -267,10 +565,6 @@ msgstr "Radera ”%s”? Dess undermappar flyttas till översta nivån och dess 
 #: build/folders.js:4 build/folders.js:7
 msgid "Delete"
 msgstr "Radera"
-
-#: build/folders.js:4
-msgid "Cancel"
-msgstr "Avbryt"
 
 #. translators: %s: folder name.
 #: build/folders.js:5
