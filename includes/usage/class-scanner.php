@@ -273,6 +273,20 @@ final class Scanner {
 	}
 
 	/**
+	 * Block attributes that hold attachment IDs, by block name.
+	 *
+	 * @return array<string, string[]>
+	 */
+	public static function block_attributes(): array {
+		/**
+		 * Filters the block attributes that hold attachment IDs.
+		 *
+		 * @param array<string, string[]> $attributes Attribute names, keyed by block name.
+		 */
+		return apply_filters( 'jcore_kirjasto_block_attributes', self::BLOCK_ATTRIBUTES );
+	}
+
+	/**
 	 * Finds attachment IDs in post content: block attributes, image classes,
 	 * gallery shortcodes and links to files in the uploads directory.
 	 *
@@ -298,12 +312,7 @@ final class Scanner {
 	 * @return int[]
 	 */
 	private static function block_ids( array $blocks ): array {
-		/**
-		 * Filters the block attributes that hold attachment IDs.
-		 *
-		 * @param array<string, string[]> $attributes Attribute names, keyed by block name.
-		 */
-		$map = apply_filters( 'jcore_kirjasto_block_attributes', self::BLOCK_ATTRIBUTES );
+		$map = self::block_attributes();
 		$ids = array();
 
 		foreach ( $blocks as $block ) {
@@ -591,7 +600,7 @@ final class Scanner {
 	 *
 	 * @return bool
 	 */
-	private static function is_media_field( array $field ): bool {
+	public static function is_media_field( array $field ): bool {
 		/**
 		 * Filters the ACF field types whose value is one or more attachment IDs.
 		 *

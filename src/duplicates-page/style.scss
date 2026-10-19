@@ -1,0 +1,233 @@
+.jcore-kirjasto {
+	max-width: 1200px;
+
+	> .description {
+		max-width: 70ch;
+		margin-bottom: 16px;
+	}
+
+	> .components-panel {
+		border: none;
+		background: none;
+	}
+
+	.components-panel__body {
+		background: #fff;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+		margin-bottom: 16px;
+	}
+
+	.components-panel__row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	&__built {
+		margin: 0;
+	}
+
+	&__progress {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		width: 100%;
+		max-width: 480px;
+
+		.components-progress-bar {
+			width: 100%;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		.description {
+			margin: 0;
+		}
+	}
+
+	&__stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: 16px;
+		padding-top: 16px;
+	}
+
+	&__stat {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__stat-value {
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	&__stat-label {
+		color: #646970;
+	}
+}
+
+.jcore-kirjasto-duplicates {
+
+	&__toolbar {
+		display: flex;
+		align-items: flex-end;
+		gap: 16px;
+		margin: 24px 0 16px;
+
+		span {
+			padding-bottom: 10px;
+			color: #646970;
+		}
+	}
+
+	&__group {
+		padding: 16px;
+		margin-bottom: 16px;
+		background: #fff;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+
+		h2 {
+			margin: 0 0 4px;
+			font-size: 15px;
+		}
+
+		.description {
+			margin: 0 0 8px;
+		}
+	}
+
+	&__entries {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 16px;
+		margin: 16px 0;
+	}
+
+	&__entry {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		padding: 8px;
+		margin: 0;
+		border: 2px solid transparent;
+		border-radius: 4px;
+
+		&.is-kept {
+			border-color: var(--wp-admin-theme-color, #2271b1);
+		}
+	}
+
+	&__preview {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		background:
+			#f0f0f1
+			repeating-conic-gradient(#e0e0e0 0% 25%, transparent 0% 50%) 50% / 16px 16px;
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	&__keep {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-weight: 600;
+
+		input {
+			margin: 0;
+		}
+	}
+
+	&__suggested {
+		align-self: flex-start;
+		padding: 0 6px;
+		font-size: 12px;
+		line-height: 20px;
+		color: #fff;
+		background: #00a32a;
+		border-radius: 2px;
+	}
+
+	&__title {
+		font-weight: 600;
+		overflow-wrap: anywhere;
+	}
+
+	&__details {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 2px 8px;
+		margin: 0;
+		font-size: 12px;
+
+		dt {
+			color: #646970;
+		}
+
+		dd {
+			margin: 0;
+			overflow-wrap: anywhere;
+		}
+	}
+
+	&__unused {
+		margin: 0;
+		color: #646970;
+	}
+
+	&__usage {
+
+		ul {
+			margin: 4px 0 0;
+		}
+
+		li {
+			margin-bottom: 4px;
+		}
+	}
+
+	&__place {
+		display: block;
+		font-size: 12px;
+		color: #646970;
+	}
+
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+
+		.description {
+			margin: 0;
+		}
+	}
+
+	&__dialog-actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 8px;
+	}
+
+	&__pages {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+}

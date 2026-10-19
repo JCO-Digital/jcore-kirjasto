@@ -5,6 +5,7 @@ The JCORE media library plugin. Each feature is a module of its own:
 - **Usage** – where every attachment is used: a "Used in" column, a used/not used filter and a "Used in" list in the attachment details, backed by an index of what each post, term, settings page and theme file refers to.
 - **Folders** – a folder tree beside the Media screen and inside every media modal. Files are dragged onto folders, uploads go into the open folder, and folders can be imported from FileBird, HappyFiles and Enhanced Media Library.
 - **Replace** – a new file in place of an attachment's file, of the same type. The attachment keeps its ID and the file its name, so the new file shows everywhere the old one was used.
+- **Duplicates** – finds files uploaded more than once and images that look the same, merges them into one attachment, and warns before a file already in the library is uploaded again.
 
 This file covers the repository and the development workflow. What the plugin does, and how to use it, is in [readme.txt](readme.txt).
 
@@ -54,7 +55,8 @@ uninstall.php                          Drops the table and options on delete
 includes/
   class-plugin.php                     Loads the updater and the features
   class-assets.php                     Enqueues a build entry with its translations
-  class-database.php                   Usage table name, schema and upgrades
+  class-database.php                   Table names, schema and upgrades
+  class-attachment-files.php           An attachment's file URLs, and moving links between files
   rest/class-controller.php            Shared namespace and permission check
   usage/
     class-feature.php                  Wires the usage feature to its hooks
@@ -80,12 +82,27 @@ includes/
     admin/class-media-library.php      "Replace file" field and row action, assets
     rest/class-replace-controller.php  Takes the upload
     cli/class-command.php              wp kirjasto replace
+  duplicates/
+    class-feature.php                  Wires the duplicates feature to its hooks
+    class-fingerprint.php              Content hash and perceptual hash of a file
+    class-indexer.php                  Fingerprints uploads and changed files, on shutdown
+    class-scan.php                     Full scans in batches: WP-Cron, REST and WP-CLI
+    class-finder.php                   Groups the fingerprints into duplicates
+    class-rewriter.php                 Moves references from one attachment to another
+    class-merger.php                   Merges duplicates, guided by the usage index
+    admin/class-page.php               Media > Duplicates screen and its assets
+    admin/class-media-library.php      "Duplicates" field, the upload check's assets
+    rest/class-duplicates-controller.php Groups, scan, merge, dismiss and the upload check
+    cli/class-command.php              wp kirjasto duplicates scan | list | merge
 views/usage/page.php                   Mount point for the Media > Usage app
+views/duplicates/page.php              Mount point for the Media > Duplicates app
 src/
   usage-page/                          The Media > Usage app (@wordpress/scripts)
   usage-media/                         Grid mode usage filter and the "Used in" list styles
   folders/                             The folder list and its media library integration
   replace/                             The "Replace file" button
+  duplicates-page/                     The Media > Duplicates app
+  duplicates-upload/                   The check before uploading a file the library has
 languages/                             .po sources; .pot, .mo and .json are generated
 ```
 
@@ -129,6 +146,16 @@ The attachment stays as it is – ID, title, alt text, folder, every reference t
 
 The file keeps its address, and image responses are commonly cached for a long time (and `Vary: Accept` keeps a refetch from replacing the cached copy), so the browser would keep showing the old file even after an ordinary reload. The admin therefore shows a replaced attachment's images with `?jcore-kirjasto-v={time of replacement}`: the media views add it to the template data only, so the model keeps the real addresses that are inserted into content and copied with "Copy URL", and PHP adds it to `wp_get_attachment_image_src()` and `srcset` on admin pages loaded with GET, outside AJAX. The front end and URLs in content are left as they are.
 
+## How duplicates are found
+
+Every attachment gets a row in `{prefix}jcore_kirjasto_fingerprints`: the SHA-1 of its original file (`content_hash`), the SHA-1 of the file as it was uploaded (`upload_hash`, taken on `wp_handle_upload` before image optimisers rewrite it), and for images a 64-bit difference hash (`phash`) of the 300 pixel copy: the image shrunk to 9 by 8 grey pixels, each bit saying whether a pixel is darker than its neighbour.
+
+- **Keeping up.** `Indexer` fingerprints an attachment on `shutdown` when it is added or its file or metadata changes, including replacements. A file whose size and modification time did not change is not read again.
+- **In full.** `Scan` walks every attachment, 25 at a time, the same way the usage rebuild does, and starts on its own on first install and whenever `Fingerprint::VERSION` changes. A file that is not on disk is recorded as `missing` and cannot be compared.
+- **Grouping.** `Finder` treats attachments sharing one file – Polylang's media translations – as one entry. Entries are *identical* when a hash matches, and *look the same* when their perceptual hashes differ in at most 6 bits and their proportions match within 3%. Images with a nearly flat hash are left out. Rather than comparing every pair, the hash is split into 8 bytes; hashes at most 7 bits apart share one, so only entries sharing a byte are compared. The groups are cached until a fingerprint or a dismissal changes.
+- **Merging.** `Merger` needs the usage index. It rewrites every place the index lists for a duplicate – block attributes, ACF values in meta, options and ACF blocks, `wp-image-` classes, gallery `data-id`s and shortcodes, `attachment_id` links, file URLs of every size, featured images, meta keys, the site icon and logo – using the scanner's own rules, and indexes each place again. Only when the index lists the duplicate nowhere any more is it deleted (or trashed with `MEDIA_TRASH`); theme code is never rewritten, so a duplicate used there stays. Post content is written directly, without a revision, and only the block comments that change are serialised again. With Polylang, each duplicate is merged into the kept file's attachment in its own language.
+- **Before uploading.** The `duplicates-upload` script hashes a file in the browser, SHA-1 and the same difference hash, and asks `/duplicates/check`. It hooks every `wp.Uploader` (the media modal and the Media screen), the Add New screen's uploader, and the block editor's REST uploads through an `apiFetch` middleware. plupload queues a batch before announcing it and an upload in progress goes on to queued files, so a batch is taken out of the queue while it is checked and the files to upload are added again. In a media modal, and in the block editor, "Use the file in the library" selects or returns the existing attachment instead. The check needs only `upload_files`, so editors and authors get it too; the block editor fetches the existing attachment from `/duplicates/media/{id}`, as `/wp/v2/media/{id}` would refuse an author an attachment they may not edit, or one uploaded to a post they may not read.
+
 ## REST API
 
 Both screens talk to `jcore-kirjasto/v1`.
@@ -143,6 +170,13 @@ Both screens talk to `jcore-kirjasto/v1`.
 | `/folders/move` | POST – move attachments into a folder, or 0 for none | `upload_files`, and editing each file |
 | `/folders/import` | GET – sources with folders; POST – run an import step | `jcore_kirjasto_folders_capability` |
 | `/replace/{id}` | POST – replace the file with the uploaded `file` | `upload_files`, and editing the file |
+| `/duplicates` | GET – scan status and a page of groups (`kind`, `page`, `per_page`) | `manage_options` |
+| `/duplicates/scan` | POST – start a scan from the beginning | `manage_options` |
+| `/duplicates/step` | POST – fingerprint the next batch | `manage_options` |
+| `/duplicates/merge` | POST – merge `remove` into `keep` | `manage_options`, and deleting each file |
+| `/duplicates/dismiss` | POST – mark the entries of `ids` as not duplicates | `manage_options` |
+| `/duplicates/check` | POST – what the library holds of `files` (`sha1`, `phash`, `width`, `height`) | `upload_files` |
+| `/duplicates/media/{id}` | GET – an attachment as `/wp/v2/media` answers an upload, for the block editor to use instead | `upload_files` |
 
 ## WP-CLI
 
@@ -153,11 +187,15 @@ wp kirjasto folders list             # The folder tree with file counts
 wp kirjasto folders import           # Which plugins have folders to import
 wp kirjasto folders import filebird  # Import them
 wp kirjasto replace 123 ~/new.jpg    # Replace the file of attachment 123
+wp kirjasto duplicates scan          # Fingerprint the media library
+wp kirjasto duplicates list          # The groups of duplicates
+wp --user=admin kirjasto duplicates merge 123 456  # Merge 456 into 123
 ```
 
 ## Filters
 
-- `jcore_kirjasto_features` – the features to load. Remove `usage`, `folders` or `replace` to turn one off.
+- `jcore_kirjasto_features` – the features to load. Remove `usage`, `folders`, `replace` or `duplicates` to turn one off. Merging duplicates needs `usage`.
+- `jcore_kirjasto_duplicate_threshold` – how many of the 64 bits two images may differ in to look the same. Default 6, at most 7.
 - `jcore_kirjasto_folders_capability` – who may create, rename, move and delete folders. Default `upload_files`; moving a file needs the right to edit it.
 - `jcore_kirjasto_post_types` – the post types that are indexed.
 - `jcore_kirjasto_block_attributes` – block attributes holding attachment IDs, by block name.

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JCORE Kirjasto 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jcore-kirjasto\n"
-"POT-Creation-Date: 2026-10-19T11:26:09+00:00\n"
+"POT-Creation-Date: 2026-10-19T14:23:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,12 +39,54 @@ msgstr ""
 msgid "https://jco.fi"
 msgstr ""
 
+#: includes/duplicates/admin/class-media-library.php:78
+msgid "The same file is also in the library as:"
+msgid_plural "The same file is also in the library as:"
+msgstr[0] "Sama tiedosto on kirjastossa myös nimellä:"
+msgstr[1] "Sama tiedosto on kirjastossa myös nimillä:"
+
+#: includes/duplicates/admin/class-media-library.php:79
+msgid "An image that looks the same is also in the library:"
+msgid_plural "Images that look the same are also in the library:"
+msgstr[0] "Samannäköinen kuva on myös kirjastossa:"
+msgstr[1] "Samannäköisiä kuvia on myös kirjastossa:"
+
+#: includes/duplicates/admin/class-media-library.php:84
+msgid "Review duplicates"
+msgstr "Tarkastele kaksoiskappaleita"
+
+#: includes/duplicates/admin/class-media-library.php:88
+#: includes/duplicates/admin/class-page.php:68
+msgid "Duplicates"
+msgstr "Kaksoiskappaleet"
+
+#: includes/duplicates/admin/class-page.php:67 build/duplicates-page.js:8
+msgid "Duplicate Media"
+msgstr "Kaksoiskappaleet"
+
+#: includes/duplicates/class-merger.php:43
+msgid "Duplicates can only be merged or deleted with the usage index turned on."
+msgstr "Kaksoiskappaleita voi yhdistää tai poistaa vain, kun käyttöhakemisto on käytössä."
+
+#: includes/duplicates/class-merger.php:47
+msgid "The usage index is being built. Duplicates can be merged or deleted once it is done."
+msgstr "Käyttöhakemistoa rakennetaan. Kaksoiskappaleita voi yhdistää tai poistaa, kun se on valmis."
+
+#: includes/duplicates/class-merger.php:72
+#: includes/duplicates/class-merger.php:86
+msgid "These files are no longer duplicates of each other."
+msgstr "Nämä tiedostot eivät ole enää toistensa kaksoiskappaleita."
+
+#: includes/duplicates/rest/class-duplicates-controller.php:285
+msgid "The file was not found."
+msgstr "Tiedostoa ei löytynyt."
+
 #: includes/folders/admin/class-media-library.php:140 build/folders.js:12
 msgid "No folder"
 msgstr "Ei kansiota"
 
 #: includes/folders/admin/class-media-library.php:144
-#: includes/folders/class-folders.php:46
+#: includes/folders/class-folders.php:46 build/duplicates-page.js:4
 msgid "Folder"
 msgstr "Kansio"
 
@@ -64,20 +106,20 @@ msgstr[1] "%d tiedostoa siirretty."
 msgid "Folders"
 msgstr "Kansiot"
 
-#: includes/folders/class-folders.php:146
-#: includes/folders/class-folders.php:177
+#: includes/folders/class-folders.php:151
+#: includes/folders/class-folders.php:182
 msgid "A folder needs a name."
 msgstr "Kansiolla on oltava nimi."
 
-#: includes/folders/class-folders.php:188
+#: includes/folders/class-folders.php:193
 msgid "A folder cannot be moved into itself."
 msgstr "Kansiota ei voi siirtää itsensä sisään."
 
-#: includes/folders/class-folders.php:386
+#: includes/folders/class-folders.php:381
 msgid "The folder does not exist."
 msgstr "Kansiota ei ole olemassa."
 
-#: includes/folders/class-folders.php:399
+#: includes/folders/class-folders.php:394
 msgid "There is already a folder with this name here."
 msgstr "Täällä on jo tämänniminen kansio."
 
@@ -93,33 +135,33 @@ msgstr "Nimetön kansio"
 msgid "You are not allowed to move these files."
 msgstr "Sinulla ei ole oikeutta siirtää näitä tiedostoja."
 
-#: includes/replace/admin/class-media-library.php:65
-#: includes/replace/admin/class-media-library.php:154
+#: includes/replace/admin/class-media-library.php:146
+#: includes/replace/admin/class-media-library.php:248
 msgid "Replace file"
 msgstr "Korvaa tiedosto"
 
 #. translators: %s: file type, e.g. JPG.
-#: includes/replace/admin/class-media-library.php:72
+#: includes/replace/admin/class-media-library.php:153
 #, php-format
 msgid "Upload a new %s file in place of this one. It keeps the address of this file, so it changes everywhere this file is used."
 msgstr "Lataa uusi %s-tiedosto tämän tilalle. Se saa tämän tiedoston osoitteen, joten se vaihtuu kaikkialla, missä tätä tiedostoa käytetään."
 
-#: includes/replace/class-replacer.php:89
+#: includes/replace/class-replacer.php:105
 #: includes/replace/rest/class-replace-controller.php:80
 msgid "The file to replace was not found."
 msgstr "Korvattavaa tiedostoa ei löytynyt."
 
-#: includes/replace/class-replacer.php:93
+#: includes/replace/class-replacer.php:109
 msgid "The new file is empty."
 msgstr "Uusi tiedosto on tyhjä."
 
 #. translators: %s: file type, e.g. JPG.
-#: includes/replace/class-replacer.php:102
+#: includes/replace/class-replacer.php:118
 #, php-format
 msgid "The new file must be of the same type as the one it replaces: %s."
 msgstr "Uuden tiedoston on oltava samaa tyyppiä kuin korvattava tiedosto: %s."
 
-#: includes/replace/class-replacer.php:121
+#: includes/replace/class-replacer.php:137
 msgid "The new file could not be moved into place."
 msgstr "Uutta tiedostoa ei voitu siirtää paikalleen."
 
@@ -167,7 +209,7 @@ msgstr "Käyttöhakemisto"
 msgid "The usage index is still being built, so this list may be incomplete."
 msgstr "Käyttöhakemistoa rakennetaan vielä, joten lista voi olla puutteellinen."
 
-#: includes/usage/class-report.php:142
+#: includes/usage/class-report.php:142 build/duplicates-page.js:3
 msgid "Not used anywhere"
 msgstr "Ei käytössä missään"
 
@@ -243,6 +285,262 @@ msgstr "X-kuva"
 msgid "Thumbnail"
 msgstr "Pienoiskuva"
 
+#. translators: %d: number of places a file is used in.
+#: build/duplicates-page.js:2
+msgid "Used in %d place"
+msgid_plural "Used in %d places"
+msgstr[0] "Käytössä %d paikassa"
+msgstr[1] "Käytössä %d paikassa"
+
+#. translators: %d: number of places the current user may not see.
+#: build/duplicates-page.js:3
+msgid "%d item you do not have access to"
+msgid_plural "%d items you do not have access to"
+msgstr[0] "%d kohde, johon sinulla ei ole pääsyä"
+msgstr[1] "%d kohdetta, joihin sinulla ei ole pääsyä"
+
+#: build/duplicates-page.js:3
+msgid "Keep this one"
+msgstr "Säilytä tämä"
+
+#: build/duplicates-page.js:3
+msgid "Suggested"
+msgstr "Ehdotus"
+
+#: build/duplicates-page.js:3
+msgid "File"
+msgstr "Tiedosto"
+
+#: build/duplicates-page.js:3
+msgid "Dimensions"
+msgstr "Mitat"
+
+#. translators: 1: width, 2: height, both in pixels.
+#: build/duplicates-page.js:4 build/duplicates-upload.js:2
+msgid "%1$d × %2$d"
+msgstr "%1$d × %2$d"
+
+#: build/duplicates-page.js:4
+msgid "Size"
+msgstr "Koko"
+
+#: build/duplicates-page.js:4
+msgid "Uploaded"
+msgstr "Ladattu"
+
+#: build/duplicates-page.js:4
+msgid "Languages"
+msgstr "Kielet"
+
+#: build/duplicates-page.js:4
+msgid "Remove the duplicates?"
+msgstr "Poistetaanko kaksoiskappaleet?"
+
+#. translators: 1: number of files, 2: title of the file that is kept.
+#: build/duplicates-page.js:5
+msgid "%1$d file will be deleted, and “%2$s” kept."
+msgid_plural "%1$d files will be deleted, and “%2$s” kept."
+msgstr[0] "%1$d tiedosto poistetaan ja ”%2$s” säilytetään."
+msgstr[1] "%1$d tiedostoa poistetaan ja ”%2$s” säilytetään."
+
+#. translators: %d: number of places.
+#: build/duplicates-page.js:6
+msgid "%d place will be changed to use the kept file."
+msgid_plural "%d places will be changed to use the kept file."
+msgstr[0] "%d paikka muutetaan käyttämään säilytettävää tiedostoa."
+msgstr[1] "%d paikkaa muutetaan käyttämään säilytettävää tiedostoa."
+
+#: build/duplicates-page.js:6
+msgid "A file still used where it cannot be changed, such as in theme code, is kept."
+msgstr "Tiedosto, jota käytetään vielä paikassa, jota ei voi muuttaa, kuten teeman koodissa, säilytetään."
+
+#: build/duplicates-page.js:6 build/folders.js:4
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: build/duplicates-page.js:6
+msgid "Remove duplicates"
+msgstr "Poista kaksoiskappaleet"
+
+#: build/duplicates-page.js:6
+msgid "Something went wrong."
+msgstr "Jokin meni pieleen."
+
+#: build/duplicates-page.js:6 build/duplicates-page.js:10
+msgid "Identical files"
+msgstr "Identtiset tiedostot"
+
+#: build/duplicates-page.js:6 build/duplicates-page.js:10
+msgid "Images that look the same"
+msgstr "Samannäköiset kuvat"
+
+#: build/duplicates-page.js:6
+msgid "Compare them before removing any: these can differ in size, quality or small details."
+msgstr "Vertaa niitä ennen poistamista: ne voivat erota koon, laadun tai pienten yksityiskohtien osalta."
+
+#: build/duplicates-page.js:6
+msgid "Keep the selected file, remove the others"
+msgstr "Säilytä valittu tiedosto, poista muut"
+
+#: build/duplicates-page.js:6
+msgid "Not duplicates"
+msgstr "Eivät ole kaksoiskappaleita"
+
+#: build/duplicates-page.js:6
+msgid "Scanning failed."
+msgstr "Haku epäonnistui."
+
+#: build/duplicates-page.js:6
+msgid "Failed to load the duplicates."
+msgstr "Kaksoiskappaleiden lataaminen epäonnistui."
+
+#. translators: %d: number of files.
+#: build/duplicates-page.js:7
+msgid "%d duplicate removed."
+msgid_plural "%d duplicates removed."
+msgstr[0] "%d kaksoiskappale poistettu."
+msgstr[1] "%d kaksoiskappaletta poistettu."
+
+#. translators: %d: number of files.
+#: build/duplicates-page.js:8
+msgid "%d file is still used where it could not be changed, so it was kept."
+msgid_plural "%d files are still used where they could not be changed, so they were kept."
+msgstr[0] "%d tiedosto on vielä käytössä paikassa, jota ei voitu muuttaa, joten se säilytettiin."
+msgstr[1] "%d tiedostoa on vielä käytössä paikoissa, joita ei voitu muuttaa, joten ne säilytettiin."
+
+#: build/duplicates-page.js:8
+msgid "The files will no longer be listed as duplicates."
+msgstr "Tiedostoja ei enää näytetä kaksoiskappaleina."
+
+#: build/duplicates-page.js:8
+msgid "Files uploaded more than once, and images that look the same though they were resized, recompressed or saved in another format. Keep one, and everything that used the others is changed to use it."
+msgstr "Useaan kertaan ladatut tiedostot sekä samannäköiset kuvat, vaikka niiden kokoa, pakkausta tai tiedostomuotoa olisi muutettu. Säilytä yksi, niin kaikki muita käyttäneet kohdat muutetaan käyttämään sitä."
+
+#: build/duplicates-page.js:8
+msgid "Scan"
+msgstr "Haku"
+
+#. translators: %s: date and time
+#: build/duplicates-page.js:9
+msgid "Last scanned %s. New uploads are checked as they are added."
+msgstr "Haettu viimeksi %s. Uudet lataukset tarkistetaan sitä mukaa kuin niitä lisätään."
+
+#: build/duplicates-page.js:9
+msgid "The media library has not been scanned yet."
+msgstr "Mediakirjastoa ei ole vielä käyty läpi."
+
+#. translators: 1: files scanned so far, 2: files in total
+#: build/duplicates-page.js:10
+msgid "%1$s of %2$s files scanned"
+msgstr "%1$s/%2$s tiedostoa käyty läpi"
+
+#: build/duplicates-page.js:10
+msgid "Failed to start the scan."
+msgstr "Haun aloittaminen epäonnistui."
+
+#: build/duplicates-page.js:10
+msgid "Scanning…"
+msgstr "Haetaan…"
+
+#: build/duplicates-page.js:10
+msgid "Scan again"
+msgstr "Hae uudelleen"
+
+#: build/duplicates-page.js:10
+msgid "Only files that changed are read again."
+msgstr "Vain muuttuneet tiedostot luetaan uudelleen."
+
+#: build/duplicates-page.js:10
+msgid "Files scanned"
+msgstr "Tiedostoja käyty läpi"
+
+#: build/duplicates-page.js:10
+msgid "Groups of identical files"
+msgstr "Identtisten tiedostojen ryhmiä"
+
+#: build/duplicates-page.js:10
+msgid "Groups of images that look the same"
+msgstr "Samannäköisten kuvien ryhmiä"
+
+#: build/duplicates-page.js:10
+msgid "Files missing on disk"
+msgstr "Levyltä puuttuvia tiedostoja"
+
+#: build/duplicates-page.js:10
+msgid "Attachments whose file is not on this server cannot be compared. On a development copy that loads its media from the live site, most files may be missing."
+msgstr "Liitteitä, joiden tiedosto ei ole tällä palvelimella, ei voi verrata. Kehityskopiossa, joka hakee mediansa tuotantosivustolta, suurin osa tiedostoista voi puuttua."
+
+#: build/duplicates-page.js:10
+msgid "Show"
+msgstr "Näytä"
+
+#: build/duplicates-page.js:10
+msgid "All duplicates"
+msgstr "Kaikki kaksoiskappaleet"
+
+#. translators: %s: number of groups.
+#: build/duplicates-page.js:11
+msgid "%s group"
+msgid_plural "%s groups"
+msgstr[0] "%s ryhmä"
+msgstr[1] "%s ryhmää"
+
+#: build/duplicates-page.js:11
+msgid "No duplicates found."
+msgstr "Kaksoiskappaleita ei löytynyt."
+
+#: build/duplicates-page.js:11
+msgid "Previous"
+msgstr "Edellinen"
+
+#. translators: 1: current page, 2: number of pages.
+#: build/duplicates-page.js:12
+msgid "Page %1$d of %2$d"
+msgstr "Sivu %1$d/%2$d"
+
+#: build/duplicates-page.js:12
+msgid "Next"
+msgstr "Seuraava"
+
+#: build/duplicates-upload.js:1
+msgid "The same file is already in the library:"
+msgstr "Sama tiedosto on jo kirjastossa:"
+
+#: build/duplicates-upload.js:1
+msgid "An image that looks the same is already in the library:"
+msgstr "Samannäköinen kuva on jo kirjastossa:"
+
+#: build/duplicates-upload.js:2
+msgid "Use the file in the library"
+msgstr "Käytä kirjastossa olevaa tiedostoa"
+
+#: build/duplicates-upload.js:2
+msgid "Skip this file"
+msgstr "Ohita tämä tiedosto"
+
+#: build/duplicates-upload.js:2
+msgid "Upload anyway"
+msgstr "Lataa silti"
+
+#: build/duplicates-upload.js:2
+msgid "This file is already in the media library"
+msgid_plural "These files are already in the media library"
+msgstr[0] "Tämä tiedosto on jo mediakirjastossa"
+msgstr[1] "Nämä tiedostot ovat jo mediakirjastossa"
+
+#. translators: %s: file name.
+#: build/duplicates-upload.js:3
+msgid "What to do with %s"
+msgstr "Mitä tehdään tiedostolle %s"
+
+#: build/duplicates-upload.js:3
+msgid "Review all duplicates"
+msgstr "Tarkastele kaikkia kaksoiskappaleita"
+
+#: build/duplicates-upload.js:3
+msgid "Continue"
+msgstr "Jatka"
+
 #. translators: %d: number of files being dragged.
 #: build/folders.js:2
 msgid "Move %d file"
@@ -267,10 +565,6 @@ msgstr "Poistetaanko ”%s”? Sen alikansiot siirretään ylimmälle tasolle, j
 #: build/folders.js:4 build/folders.js:7
 msgid "Delete"
 msgstr "Poista"
-
-#: build/folders.js:4
-msgid "Cancel"
-msgstr "Peruuta"
 
 #. translators: %s: folder name.
 #: build/folders.js:5

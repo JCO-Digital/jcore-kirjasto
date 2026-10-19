@@ -7,5 +7,7 @@ module.exports = {
 		'usage-page': './src/usage-page/index.js',
 		'usage-media': './src/usage-media/index.js',
 		replace: './src/replace/index.js',
+		'duplicates-page': './src/duplicates-page/index.js',
+		'duplicates-upload': './src/duplicates-upload/index.js',
 	},
 };

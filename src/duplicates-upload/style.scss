@@ -1,0 +1,63 @@
+// Above the media modal, which the check can open over.
+.jcore-kirjasto-upload-check__overlay {
+	z-index: 170000;
+}
+
+.jcore-kirjasto-upload-check {
+	max-width: 560px;
+
+	&__items {
+		margin: 0;
+		list-style: none;
+	}
+
+	&__item {
+		padding: 0 0 16px;
+		margin: 0 0 16px;
+		border-bottom: 1px solid #dcdcde;
+	}
+
+	&__name {
+		margin: 0 0 8px;
+		font-size: 14px;
+		overflow-wrap: anywhere;
+	}
+
+	&__match {
+		display: flex;
+		gap: 12px;
+		margin-bottom: 8px;
+
+		p {
+			margin: 0 0 4px;
+		}
+	}
+
+	&__thumb {
+		flex: none;
+		width: 72px;
+		height: 72px;
+		object-fit: cover;
+		border: 1px solid #dcdcde;
+	}
+
+	&__meta {
+		margin-left: 8px;
+		color: #646970;
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 16px;
+	}
+}
+
+.compat-field-jcore_kirjasto_duplicates {
+
+	.jcore-kirjasto-duplicates__text,
+	.jcore-kirjasto-duplicates__list {
+		margin: 0 0 4px;
+	}
+}

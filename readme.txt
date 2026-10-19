@@ -8,11 +8,11 @@ Stable tag: 0.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Media library folders, where every image and file is used, and replacing files in place.
+Media library folders, where every image and file is used, replacing files in place, and finding duplicates.
 
 == Description ==
 
-JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media library into folders, shows where every attachment is used, and replaces files without breaking the places they are used in.
+JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media library into folders, shows where every attachment is used, replaces files without breaking the places they are used in, and finds and merges duplicates.
 
 = Folders =
 
@@ -30,6 +30,18 @@ Deleting a folder deletes no files: they move into the folder above, as do its s
 **"Replace file"** in the attachment details – in the media modal, grid mode and on the attachment edit screen – and in the list mode row actions uploads a new file in place of the old one. The new file must be of the same type: a JPG for a JPG, a PDF for a PDF.
 
 The attachment keeps its ID, title, alt text and folder, and the file keeps its name and address, so every page, block, field and link using it shows the new file. Resized copies are made again; when the new image has other proportions, links in post content to the old copies are pointed at the new ones. `wp kirjasto replace <attachment-id> <file>` does the same from WP-CLI.
+
+= Duplicates =
+
+**Media → Duplicates** lists files uploaded more than once, and images that look the same although they were resized, recompressed or saved in another format. Each file shows its size, folder and where it is used, and the one used most is suggested to keep.
+
+* **Keep one, remove the others** – everything that used the others is changed to use the kept file: blocks, images in content, galleries, featured images, ACF fields, the site logo and icon. Each removed file is deleted once nothing uses it any more.
+* **Not duplicates** – a group can be dismissed, and stays dismissed.
+* **Before uploading** – a file that is already in the library is caught before it uploads, in the media modal, on the Media screen, in Media → Add New and in the block editor, with the choice of using the existing file instead.
+* **Attachment details** – the duplicates of a file are listed with it.
+* **WP-CLI** – `wp kirjasto duplicates scan`, `list` and `merge`.
+
+The library is scanned in the background on first install, and every new upload is checked as it is added.
 
 = Usage =
 
@@ -109,13 +121,25 @@ The file keeps its address, so a browser or CDN that cached it may show the old 
 
 Links in post content are updated. Links to a resized copy written into post meta, theme files, emails or other sites are not: they break if the new image has other proportions. Links to the file itself always keep working.
 
+= How are duplicates found? =
+
+By a hash of each file's bytes, as it is now and as it was uploaded, and for images by a perceptual hash: a fingerprint of how the image looks, which stays nearly the same when it is resized, recompressed or saved as another format. Crops and edits count as different images. Images that look the same are worth a look before removing any; they can differ in quality or small details.
+
+= Is merging safe? =
+
+A file is only deleted once the usage index lists it nowhere. Places the plugin cannot change, such as an ID written into theme code, keep the file in place, and the screen says so. Links to the removed file from outside the site break, as they would after deleting it. Merging needs the usage index, and is not available while the index is being built.
+
+= Why are so many files missing? =
+
+Files are compared on the server they are stored on. A development copy that loads its media from the live site has few of the files itself.
+
 = Can I turn a feature off? =
 
-Yes: remove `usage`, `folders` or `replace` with the `jcore_kirjasto_features` filter.
+Yes: remove `usage`, `folders`, `replace` or `duplicates` with the `jcore_kirjasto_features` filter.
 
 = What happens to my data when I delete the plugin? =
 
-Deleting the plugin drops the usage index and removes its options. Folders are kept, so a reinstall finds them again. Deactivating the plugin leaves everything in place.
+Deleting the plugin drops the usage index and the fingerprints, and removes their options. Folders are kept, so a reinstall finds them again. Deactivating the plugin leaves everything in place.
 
 == Changelog ==
 

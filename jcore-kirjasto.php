@@ -71,6 +71,7 @@ spl_autoload_register(
 
 register_activation_hook( __FILE__, array( Database::class, 'install' ) );
 register_deactivation_hook( __FILE__, array( Usage\Rebuild::class, 'unschedule' ) );
+register_deactivation_hook( __FILE__, array( Duplicates\Scan::class, 'unschedule' ) );
 
 add_action(
 	'plugins_loaded',
