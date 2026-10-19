@@ -46,12 +46,14 @@ jobs:
         run: pnpm i18n
 
       # Check what actually ships: the tree minus everything in .distignore,
-      # with vendor/ pruned to what the release bundles.
+      # with vendor/ pruned to what the release bundles. The release zip leaves
+      # out .distignore itself; it cannot list itself, as the dist repository
+      # step of the publish workflow turns the copy it syncs into a .gitignore.
       - name: Assemble distribution
         run: |
           composer install --no-dev --no-interaction --prefer-dist
           mkdir -p dist/jcore-kirjasto
-          rsync -a --exclude-from=.distignore --exclude=dist ./ dist/jcore-kirjasto/
+          rsync -a --exclude-from=.distignore --exclude=.distignore --exclude=dist ./ dist/jcore-kirjasto/
 
       # vendor/ holds the jcore-update library, which is not ours to check.
       - name: Plugin Check

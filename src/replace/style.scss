@@ -1,0 +1,11 @@
+.jcore-kirjasto-replace-status {
+	margin: 0.5em 0 0;
+
+	&:empty {
+		display: none;
+	}
+
+	&.is-error {
+		color: #d63638;
+	}
+}

@@ -63,6 +63,7 @@ final class Plugin {
 		$features = array(
 			'usage'   => Usage\Feature::class,
 			'folders' => Folders\Feature::class,
+			'replace' => Replace\Feature::class,
 		);
 
 		/**

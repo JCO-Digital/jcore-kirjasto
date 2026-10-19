@@ -88,17 +88,20 @@ final class Folders {
 			)
 		);
 
-		$language = self::language_clause();
+		// 0 when counts are not limited to a language.
+		$language = self::language();
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		$counts = $wpdb->get_results(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $language is built by language_clause().
-				"SELECT tt.term_id, COUNT(*) AS count FROM %i tr INNER JOIN %i tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN %i p ON p.ID = tr.object_id WHERE tt.taxonomy = %s AND p.post_type = 'attachment' AND p.post_status <> 'trash' $language GROUP BY tt.term_id",
+				"SELECT tt.term_id, COUNT(*) AS count FROM %i tr INNER JOIN %i tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN %i p ON p.ID = tr.object_id WHERE tt.taxonomy = %s AND p.post_type = 'attachment' AND p.post_status <> 'trash' AND ( %d = 0 OR p.ID IN (SELECT object_id FROM %i WHERE term_taxonomy_id = %d) ) GROUP BY tt.term_id",
 				$wpdb->term_relationships,
 				$wpdb->term_taxonomy,
 				$wpdb->posts,
-				self::TAXONOMY
+				self::TAXONOMY,
+				$language,
+				$wpdb->term_relationships,
+				$language
 			),
 			OBJECT_K
 		);
@@ -106,9 +109,11 @@ final class Folders {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		$total = (int) $wpdb->get_var(
 			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $language is built by language_clause().
-				"SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_status <> 'trash' $language",
-				$wpdb->posts
+				"SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_status <> 'trash' AND ( %d = 0 OR p.ID IN (SELECT object_id FROM %i WHERE term_taxonomy_id = %d) )",
+				$wpdb->posts,
+				$language,
+				$wpdb->term_relationships,
+				$language
 			)
 		);
 
@@ -354,27 +359,17 @@ final class Folders {
 	 * Polylang translates media: the translations are separate attachments,
 	 * and the library shows one language at a time.
 	 *
-	 * @return string SQL to append to a WHERE clause on `p`, or an empty string.
+	 * @return int The `term_taxonomy_id` of the language, or 0 for all languages.
 	 */
-	private static function language_clause(): string {
-		global $wpdb;
-
+	private static function language(): int {
 		if ( ! function_exists( 'pll_is_translated_post_type' ) || ! pll_is_translated_post_type( 'attachment' ) ) {
-			return '';
+			return 0;
 		}
 
 		$slug = (string) get_user_meta( get_current_user_id(), 'pll_filter_content', true );
 		$term = '' !== $slug ? get_term_by( 'slug', $slug, 'language' ) : false;
 
-		if ( ! $term instanceof \WP_Term ) {
-			return '';
-		}
-
-		return $wpdb->prepare(
-			' AND p.ID IN (SELECT object_id FROM %i WHERE term_taxonomy_id = %d)',
-			$wpdb->term_relationships,
-			$term->term_taxonomy_id
-		);
+		return $term instanceof \WP_Term ? (int) $term->term_taxonomy_id : 0;
 	}
 
 	/**

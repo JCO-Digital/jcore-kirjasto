@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JCORE Kirjasto 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jcore-kirjasto\n"
+"POT-Creation-Date: 2026-10-19T11:26:09+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-05T09:09:58+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: jcore-kirjasto\n"
@@ -39,36 +39,119 @@ msgstr ""
 msgid "https://jco.fi"
 msgstr ""
 
+#: includes/folders/admin/class-media-library.php:140 build/folders.js:12
+msgid "No folder"
+msgstr "Ei kansiota"
+
+#: includes/folders/admin/class-media-library.php:144
+#: includes/folders/class-folders.php:46
+msgid "Folder"
+msgstr "Kansio"
+
+#: includes/folders/admin/class-media-library.php:206
+msgid "Move to folder"
+msgstr "Siirrä kansioon"
+
+#. translators: %d: number of files moved.
+#: includes/folders/admin/class-media-library.php:278
+#, php-format
+msgid "%d file moved."
+msgid_plural "%d files moved."
+msgstr[0] "%d tiedosto siirretty."
+msgstr[1] "%d tiedostoa siirretty."
+
+#: includes/folders/class-folders.php:45 build/folders.js:12
+msgid "Folders"
+msgstr "Kansiot"
+
+#: includes/folders/class-folders.php:146
+#: includes/folders/class-folders.php:177
+msgid "A folder needs a name."
+msgstr "Kansiolla on oltava nimi."
+
+#: includes/folders/class-folders.php:188
+msgid "A folder cannot be moved into itself."
+msgstr "Kansiota ei voi siirtää itsensä sisään."
+
+#: includes/folders/class-folders.php:386
+msgid "The folder does not exist."
+msgstr "Kansiota ei ole olemassa."
+
+#: includes/folders/class-folders.php:399
+msgid "There is already a folder with this name here."
+msgstr "Täällä on jo tämänniminen kansio."
+
+#: includes/folders/class-importer.php:91
+msgid "Folders cannot be imported from this source."
+msgstr "Tästä lähteestä ei voi tuoda kansioita."
+
+#: includes/folders/class-importer.php:218
+msgid "Untitled folder"
+msgstr "Nimetön kansio"
+
+#: includes/folders/rest/class-folders-controller.php:226
+msgid "You are not allowed to move these files."
+msgstr "Sinulla ei ole oikeutta siirtää näitä tiedostoja."
+
+#: includes/replace/admin/class-media-library.php:65
+#: includes/replace/admin/class-media-library.php:154
+msgid "Replace file"
+msgstr "Korvaa tiedosto"
+
+#. translators: %s: file type, e.g. JPG.
+#: includes/replace/admin/class-media-library.php:72
+#, php-format
+msgid "Upload a new %s file in place of this one. It keeps the address of this file, so it changes everywhere this file is used."
+msgstr "Lataa uusi %s-tiedosto tämän tilalle. Se saa tämän tiedoston osoitteen, joten se vaihtuu kaikkialla, missä tätä tiedostoa käytetään."
+
+#: includes/replace/class-replacer.php:89
+#: includes/replace/rest/class-replace-controller.php:80
+msgid "The file to replace was not found."
+msgstr "Korvattavaa tiedostoa ei löytynyt."
+
+#: includes/replace/class-replacer.php:93
+msgid "The new file is empty."
+msgstr "Uusi tiedosto on tyhjä."
+
+#. translators: %s: file type, e.g. JPG.
+#: includes/replace/class-replacer.php:102
+#, php-format
+msgid "The new file must be of the same type as the one it replaces: %s."
+msgstr "Uuden tiedoston on oltava samaa tyyppiä kuin korvattava tiedosto: %s."
+
+#: includes/replace/class-replacer.php:121
+msgid "The new file could not be moved into place."
+msgstr "Uutta tiedostoa ei voitu siirtää paikalleen."
+
+#: includes/replace/rest/class-replace-controller.php:84
+msgid "No file was uploaded."
+msgstr "Tiedostoa ei ladattu."
+
 #: includes/usage/admin/class-media-library.php:73
 #: includes/usage/admin/class-media-library.php:78
 #: includes/usage/admin/class-media-library.php:112
 msgid "Used in"
 msgstr "Käytössä"
 
-#: includes/usage/admin/class-media-library.php:137
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:137 build/usage-media.js:1
 msgid "All usage"
 msgstr "Kaikki käyttö"
 
-#: includes/usage/admin/class-media-library.php:138
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:138 build/usage-media.js:1
 #: build/usage-page.js:3
 msgid "Used"
 msgstr "Käytössä"
 
-#: includes/usage/admin/class-media-library.php:139
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:139 build/usage-media.js:1
 #: build/usage-page.js:3
 msgid "Not used"
 msgstr "Ei käytössä"
 
-#: includes/usage/admin/class-media-library.php:145
-#: build/usage-media.js:1
+#: includes/usage/admin/class-media-library.php:145 build/usage-media.js:1
 msgid "Filter by usage"
 msgstr "Suodata käytön mukaan"
 
-#: includes/usage/admin/class-page.php:62
-#: build/usage-page.js:1
+#: includes/usage/admin/class-page.php:62 build/usage-page.js:1
 msgid "Media Usage"
 msgstr "Median käyttö"
 
@@ -76,8 +159,7 @@ msgstr "Median käyttö"
 msgid "Usage"
 msgstr "Käyttö"
 
-#: includes/usage/class-feature.php:60
-#: build/usage-page.js:1
+#: includes/usage/class-feature.php:60 build/usage-page.js:1
 msgid "Usage index"
 msgstr "Käyttöhakemisto"
 
@@ -109,13 +191,13 @@ msgstr[1] "Käytössä myös %d kohteessa, joihin sinulla ei ole pääsyä."
 msgid "(no title)"
 msgstr "(ei otsikkoa)"
 
-#: includes/usage/class-report.php:370
-msgid "Settings"
-msgstr "Asetukset"
-
 #: includes/usage/class-report.php:355
 msgid "Theme"
 msgstr "Teema"
+
+#: includes/usage/class-report.php:370
+msgid "Settings"
+msgstr "Asetukset"
 
 #: includes/usage/class-report.php:375
 msgid "Yoast SEO"
@@ -161,6 +243,153 @@ msgstr "X-kuva"
 msgid "Thumbnail"
 msgstr "Pienoiskuva"
 
+#. translators: %d: number of files being dragged.
+#: build/folders.js:2
+msgid "Move %d file"
+msgid_plural "Move %d files"
+msgstr[0] "Siirrä %d tiedosto"
+msgstr[1] "Siirrä %d tiedostoa"
+
+#: build/folders.js:2
+msgid "New folder name"
+msgstr "Uuden kansion nimi"
+
+#. translators: 1: folder name, 2: name of its parent folder.
+#: build/folders.js:3
+msgid "Delete “%1$s”? Its files and subfolders move to “%2$s”."
+msgstr "Poistetaanko ”%1$s”? Sen tiedostot ja alikansiot siirretään kansioon ”%2$s”."
+
+#. translators: %s: folder name.
+#: build/folders.js:4
+msgid "Delete “%s”? Its subfolders move to the top level and its files are left without a folder."
+msgstr "Poistetaanko ”%s”? Sen alikansiot siirretään ylimmälle tasolle, ja sen tiedostot jäävät ilman kansiota."
+
+#: build/folders.js:4 build/folders.js:7
+msgid "Delete"
+msgstr "Poista"
+
+#: build/folders.js:4
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. translators: %s: folder name.
+#: build/folders.js:5
+msgid "Expand %s"
+msgstr "Avaa %s"
+
+#. translators: %s: folder name.
+#: build/folders.js:6
+msgid "Collapse %s"
+msgstr "Sulje %s"
+
+#: build/folders.js:6
+msgid "Folder name"
+msgstr "Kansion nimi"
+
+#. translators: %s: folder name.
+#: build/folders.js:7
+msgid "Actions for %s"
+msgstr "Toiminnot: %s"
+
+#: build/folders.js:7 build/folders.js:12
+msgid "New subfolder"
+msgstr "Uusi alikansio"
+
+#: build/folders.js:7
+msgid "Rename"
+msgstr "Nimeä uudelleen"
+
+#. translators: 1: plugin name, 2: "25 folders", 3: "279 files".
+#: build/folders.js:8
+msgid "%1$s has %2$s with %3$s."
+msgstr "Lisäosassa %1$s on %2$s, joissa on %3$s."
+
+#. translators: %s: number of folders.
+#: build/folders.js:9
+msgid "%s folder"
+msgid_plural "%s folders"
+msgstr[0] "%s kansio"
+msgstr[1] "%s kansiota"
+
+#. translators: %s: number of files.
+#: build/folders.js:10
+msgid "%s file"
+msgid_plural "%s files"
+msgstr[0] "%s tiedosto"
+msgstr[1] "%s tiedostoa"
+
+#. translators: 1: files handled so far, 2: all files.
+#: build/folders.js:11
+msgid "%1$s of %2$s files"
+msgstr "%1$s / %2$s tiedostoa"
+
+#. translators: 1: number of folders, 2: plugin name.
+#: build/folders.js:12
+msgid "Imported %1$s folder from %2$s."
+msgid_plural "Imported %1$s folders from %2$s."
+msgstr[0] "%1$s kansio tuotiin lisäosasta %2$s."
+msgstr[1] "%1$s kansiota tuotiin lisäosasta %2$s."
+
+#: build/folders.js:12
+msgid "The folders could not be imported."
+msgstr "Kansioita ei voitu tuoda."
+
+#: build/folders.js:12
+msgid "Import folders"
+msgstr "Tuo kansiot"
+
+#: build/folders.js:12
+msgid "Not now"
+msgstr "Ei nyt"
+
+#: build/folders.js:12
+msgid "The folders could not be saved."
+msgstr "Kansioita ei voitu tallentaa."
+
+#: build/folders.js:12
+msgid "New folder"
+msgstr "Uusi kansio"
+
+#: build/folders.js:12
+msgid "Hide folders"
+msgstr "Piilota kansiot"
+
+#: build/folders.js:12
+msgid "All files"
+msgstr "Kaikki tiedostot"
+
+#: build/folders.js:12
+msgid "Move to the top level"
+msgstr "Siirrä ylimmälle tasolle"
+
+#: build/folders.js:12
+msgid "No folders yet. Create one with the + button, then drag files onto it."
+msgstr "Kansioita ei vielä ole. Luo kansio +-painikkeella ja vedä tiedostoja sen päälle."
+
+#: build/folders.js:12
+msgid "No folders yet."
+msgstr "Kansioita ei vielä ole."
+
+#: build/folders.js:12
+msgid "Show folders"
+msgstr "Näytä kansiot"
+
+#: build/folders.js:12
+msgid "Folder to move the files to"
+msgstr "Kansio, johon tiedostot siirretään"
+
+#: build/replace.js:1
+msgid "Replacing…"
+msgstr "Korvataan…"
+
+#: build/replace.js:1
+msgid "The file was replaced."
+msgstr "Tiedosto korvattiin."
+
+#: build/replace.js:1
+msgid "The file could not be replaced."
+msgstr "Tiedostoa ei voitu korvata."
+
 #: build/usage-page.js:1
 msgid "Indexing failed."
 msgstr "Indeksointi epäonnistui."
@@ -175,7 +404,6 @@ msgstr "Jokaisesta artikkelista, sivusta, lohkosuunnitelmasta, sivupohjasta, ter
 
 #. translators: %s: date and time
 #: build/usage-page.js:2
-#, js-format
 msgid "Last built %s. Changes to content are indexed as they are saved."
 msgstr "Rakennettu viimeksi %s. Sisällön muutokset indeksoidaan tallennettaessa."
 
@@ -185,7 +413,6 @@ msgstr "Hakemistoa ei ole vielä rakennettu. Siihen asti tiedostot voivat näky�
 
 #. translators: 1: items scanned so far, 2: items in total
 #: build/usage-page.js:3
-#, js-format
 msgid "%1$s of %2$s items scanned"
 msgstr "%1$s / %2$s kohdetta käyty läpi"
 
@@ -216,207 +443,3 @@ msgstr "Mediatiedostot"
 #: build/usage-page.js:3
 msgid "References"
 msgstr "Viittaukset"
-
-#: includes/folders/admin/class-media-library.php:140
-#: build/folders.js:12
-msgid "No folder"
-msgstr "Ei kansiota"
-
-#: includes/folders/admin/class-media-library.php:144
-#: includes/folders/class-folders.php:46
-msgid "Folder"
-msgstr "Kansio"
-
-#: includes/folders/admin/class-media-library.php:206
-msgid "Move to folder"
-msgstr "Siirrä kansioon"
-
-#. translators: %d: number of files moved.
-#: includes/folders/admin/class-media-library.php:278
-#, php-format
-msgid "%d file moved."
-msgid_plural "%d files moved."
-msgstr[0] "%d tiedosto siirretty."
-msgstr[1] "%d tiedostoa siirretty."
-
-#: includes/folders/class-folders.php:45
-#: build/folders.js:12
-msgid "Folders"
-msgstr "Kansiot"
-
-#: includes/folders/class-folders.php:146
-#: includes/folders/class-folders.php:177
-msgid "A folder needs a name."
-msgstr "Kansiolla on oltava nimi."
-
-#: includes/folders/class-folders.php:188
-msgid "A folder cannot be moved into itself."
-msgstr "Kansiota ei voi siirtää itsensä sisään."
-
-#: includes/folders/class-folders.php:386
-msgid "The folder does not exist."
-msgstr "Kansiota ei ole olemassa."
-
-#: includes/folders/class-folders.php:399
-msgid "There is already a folder with this name here."
-msgstr "Täällä on jo tämänniminen kansio."
-
-#: includes/folders/class-importer.php:91
-msgid "Folders cannot be imported from this source."
-msgstr "Tästä lähteestä ei voi tuoda kansioita."
-
-#: includes/folders/class-importer.php:218
-msgid "Untitled folder"
-msgstr "Nimetön kansio"
-
-#: includes/folders/rest/class-folders-controller.php:226
-msgid "You are not allowed to move these files."
-msgstr "Sinulla ei ole oikeutta siirtää näitä tiedostoja."
-
-#. translators: %d: number of files being dragged.
-#: build/folders.js:2
-#, js-format
-msgid "Move %d file"
-msgid_plural "Move %d files"
-msgstr[0] "Siirrä %d tiedosto"
-msgstr[1] "Siirrä %d tiedostoa"
-
-#: build/folders.js:2
-msgid "New folder name"
-msgstr "Uuden kansion nimi"
-
-#. translators: 1: folder name, 2: name of its parent folder.
-#: build/folders.js:3
-#, js-format
-msgid "Delete “%1$s”? Its files and subfolders move to “%2$s”."
-msgstr "Poistetaanko ”%1$s”? Sen tiedostot ja alikansiot siirretään kansioon ”%2$s”."
-
-#. translators: %s: folder name.
-#: build/folders.js:4
-#, js-format
-msgid "Delete “%s”? Its subfolders move to the top level and its files are left without a folder."
-msgstr "Poistetaanko ”%s”? Sen alikansiot siirretään ylimmälle tasolle, ja sen tiedostot jäävät ilman kansiota."
-
-#: build/folders.js:4
-#: build/folders.js:7
-msgid "Delete"
-msgstr "Poista"
-
-#: build/folders.js:4
-msgid "Cancel"
-msgstr "Peruuta"
-
-#. translators: %s: folder name.
-#: build/folders.js:5
-#, js-format
-msgid "Expand %s"
-msgstr "Avaa %s"
-
-#. translators: %s: folder name.
-#: build/folders.js:6
-#, js-format
-msgid "Collapse %s"
-msgstr "Sulje %s"
-
-#: build/folders.js:6
-msgid "Folder name"
-msgstr "Kansion nimi"
-
-#. translators: %s: folder name.
-#: build/folders.js:7
-#, js-format
-msgid "Actions for %s"
-msgstr "Toiminnot: %s"
-
-#: build/folders.js:7
-#: build/folders.js:12
-msgid "New subfolder"
-msgstr "Uusi alikansio"
-
-#: build/folders.js:7
-msgid "Rename"
-msgstr "Nimeä uudelleen"
-
-#. translators: 1: plugin name, 2: "25 folders", 3: "279 files".
-#: build/folders.js:8
-#, js-format
-msgid "%1$s has %2$s with %3$s."
-msgstr "Lisäosassa %1$s on %2$s, joissa on %3$s."
-
-#. translators: %s: number of folders.
-#: build/folders.js:9
-#, js-format
-msgid "%s folder"
-msgid_plural "%s folders"
-msgstr[0] "%s kansio"
-msgstr[1] "%s kansiota"
-
-#. translators: %s: number of files.
-#: build/folders.js:10
-#, js-format
-msgid "%s file"
-msgid_plural "%s files"
-msgstr[0] "%s tiedosto"
-msgstr[1] "%s tiedostoa"
-
-#. translators: 1: files handled so far, 2: all files.
-#: build/folders.js:11
-#, js-format
-msgid "%1$s of %2$s files"
-msgstr "%1$s / %2$s tiedostoa"
-
-#. translators: 1: number of folders, 2: plugin name.
-#: build/folders.js:12
-#, js-format
-msgid "Imported %1$s folder from %2$s."
-msgid_plural "Imported %1$s folders from %2$s."
-msgstr[0] "%1$s kansio tuotiin lisäosasta %2$s."
-msgstr[1] "%1$s kansiota tuotiin lisäosasta %2$s."
-
-#: build/folders.js:12
-msgid "The folders could not be imported."
-msgstr "Kansioita ei voitu tuoda."
-
-#: build/folders.js:12
-msgid "Import folders"
-msgstr "Tuo kansiot"
-
-#: build/folders.js:12
-msgid "Not now"
-msgstr "Ei nyt"
-
-#: build/folders.js:12
-msgid "The folders could not be saved."
-msgstr "Kansioita ei voitu tallentaa."
-
-#: build/folders.js:12
-msgid "New folder"
-msgstr "Uusi kansio"
-
-#: build/folders.js:12
-msgid "All files"
-msgstr "Kaikki tiedostot"
-
-#: build/folders.js:12
-msgid "Move to the top level"
-msgstr "Siirrä ylimmälle tasolle"
-
-#: build/folders.js:12
-msgid "No folders yet. Create one with the + button, then drag files onto it."
-msgstr "Kansioita ei vielä ole. Luo kansio +-painikkeella ja vedä tiedostoja sen päälle."
-
-#: build/folders.js:12
-msgid "No folders yet."
-msgstr "Kansioita ei vielä ole."
-
-#: build/folders.js:12
-msgid "Folder to move the files to"
-msgstr "Kansio, johon tiedostot siirretään"
-
-#: build/folders.js:12
-msgid "Hide folders"
-msgstr "Piilota kansiot"
-
-#: build/folders.js:12
-msgid "Show folders"
-msgstr "Näytä kansiot"

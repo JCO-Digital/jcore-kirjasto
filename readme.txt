@@ -8,11 +8,11 @@ Stable tag: 0.1.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Media library folders, and where every image and file is used.
+Media library folders, where every image and file is used, and replacing files in place.
 
 == Description ==
 
-JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media library into folders, and shows where every attachment is used.
+JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media library into folders, shows where every attachment is used, and replaces files without breaking the places they are used in.
 
 = Folders =
 
@@ -24,6 +24,12 @@ JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media 
 * **WP-CLI** – `wp kirjasto folders list` and `wp kirjasto folders import`.
 
 Deleting a folder deletes no files: they move into the folder above, as do its subfolders. Anyone who can upload files can manage folders; a filter narrows that down. A file can only be moved by someone who may edit it.
+
+= Replace =
+
+**"Replace file"** in the attachment details – in the media modal, grid mode and on the attachment edit screen – and in the list mode row actions uploads a new file in place of the old one. The new file must be of the same type: a JPG for a JPG, a PDF for a PDF.
+
+The attachment keeps its ID, title, alt text and folder, and the file keeps its name and address, so every page, block, field and link using it shows the new file. Resized copies are made again; when the new image has other proportions, links in post content to the old copies are pointed at the new ones. `wp kirjasto replace <attachment-id> <file>` does the same from WP-CLI.
 
 = Usage =
 
@@ -95,9 +101,17 @@ A folder's count is every file in it, whatever the type or date filter shows.
 
 Anyone who can upload files. The `jcore_kirjasto_folders_capability` filter changes the capability needed to create, rename, move and delete folders, e.g. to `edit_others_posts` for editors and up.
 
+= Why do I still see the old file after replacing it? =
+
+The file keeps its address, so a browser or CDN that cached it may show the old file on the site until the cache expires; clear the CDN cache, if the site has one. The media library and the attachment edit screen always show the new file.
+
+= What about links to the old resized copies outside post content? =
+
+Links in post content are updated. Links to a resized copy written into post meta, theme files, emails or other sites are not: they break if the new image has other proportions. Links to the file itself always keep working.
+
 = Can I turn a feature off? =
 
-Yes: remove `usage` or `folders` with the `jcore_kirjasto_features` filter.
+Yes: remove `usage`, `folders` or `replace` with the `jcore_kirjasto_features` filter.
 
 = What happens to my data when I delete the plugin? =
 

@@ -279,7 +279,7 @@ final class Rebuild {
 
 		list( $where, $args ) = self::posts_where();
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $where only holds placeholders; the values are prepared.
 		$ids = $wpdb->get_col(
 			// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Spread arguments.
 			$wpdb->prepare(
@@ -304,7 +304,7 @@ final class Rebuild {
 
 		list( $where, $args ) = self::posts_where();
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $where only holds placeholders; the values are prepared.
 		return (int) $wpdb->get_var(
 			// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Spread arguments.
 			$wpdb->prepare(

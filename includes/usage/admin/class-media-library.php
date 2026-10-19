@@ -132,7 +132,7 @@ final class Media_Library {
 			return;
 		}
 
-		$current = self::requested_filter( $_GET[ self::KEY ] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only list filter.
+		$current = self::requested_filter( sanitize_key( wp_unslash( $_GET[ self::KEY ] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only list filter.
 		$options = array(
 			''       => __( 'All usage', 'jcore-kirjasto' ),
 			'used'   => __( 'Used', 'jcore-kirjasto' ),
@@ -167,7 +167,7 @@ final class Media_Library {
 			return;
 		}
 
-		$filter = self::requested_filter( $_GET[ self::KEY ] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only list filter.
+		$filter = self::requested_filter( sanitize_key( wp_unslash( $_GET[ self::KEY ] ?? '' ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only list filter.
 		if ( $filter ) {
 			$query->set( self::KEY, $filter );
 		}
@@ -232,7 +232,7 @@ final class Media_Library {
 		$posts = (array) $posts;
 
 		$is_list = 'upload.php' === $pagenow && $query instanceof \WP_Query && $query->is_main_query();
-		$is_grid = wp_doing_ajax() && 'query-attachments' === ( $_REQUEST['action'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$is_grid = wp_doing_ajax() && 'query-attachments' === sanitize_key( wp_unslash( $_REQUEST['action'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( $posts && ( $is_list || $is_grid ) ) {
 			Report::prime( wp_list_pluck( $posts, 'ID' ) );

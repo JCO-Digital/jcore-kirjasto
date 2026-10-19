@@ -371,7 +371,7 @@ final class Indexer {
 
 		$placeholders = implode( ', ', $placeholders );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $placeholders only holds placeholders; the values are prepared.
 		$wpdb->query(
 			// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Spread arguments.
 			$wpdb->prepare(
