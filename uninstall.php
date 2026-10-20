@@ -32,6 +32,7 @@ function jcore_kirjasto_uninstall_site(): void {
 	delete_option( 'jcore_kirjasto_duplicates_dismissed' );
 	delete_option( 'jcore_kirjasto_duplicates_revision' );
 	delete_transient( 'jcore_kirjasto_duplicate_groups' );
+	delete_transient( 'jcore_kirjasto_theme_checked' );
 	delete_post_meta_by_key( '_jcore_kirjasto_upload_hash' );
 	delete_post_meta_by_key( '_jcore_kirjasto_replaced' );
 	wp_clear_scheduled_hook( 'jcore_kirjasto_rebuild' );

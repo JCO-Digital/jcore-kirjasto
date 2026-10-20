@@ -331,7 +331,7 @@ final class Media_Library {
 		$imports    = array();
 
 		// Offered on the Media screen, until everything has been imported.
-		if ( $can_manage && in_array( $screen, array( 'grid', 'list' ), true ) ) {
+		if ( $can_manage && current_user_can( Folders::import_capability() ) && in_array( $screen, array( 'grid', 'list' ), true ) ) {
 			$imports = array_values(
 				array_filter(
 					Importer::sources(),

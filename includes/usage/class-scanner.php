@@ -66,11 +66,30 @@ final class Scanner {
 	private const FIELD_TYPES = array( 'image', 'file', 'gallery' );
 
 	/**
+	 * Most links into the uploads directory resolved in one text; the rest
+	 * are ignored. Each link is up to three lookups.
+	 */
+	private const MAX_LINKS = 500;
+
+	/**
+	 * Most file paths remembered by ids_for_files() in one request.
+	 */
+	private const MAX_CACHED_FILES = 10000;
+
+	/**
 	 * Resolved ACF fields, keyed by field key. `false` marks a key ACF does not know.
 	 *
 	 * @var array<string, array<string, mixed>|false>
 	 */
 	private static array $fields = array();
+
+	/**
+	 * Attachment IDs found for file paths, keyed by path, so the same links in
+	 * several fields or objects are looked up once.
+	 *
+	 * @var array<string, int[]>
+	 */
+	private static array $file_ids = array();
 
 	/**
 	 * Finds the attachments a post uses: in its content, as its featured image,
@@ -494,7 +513,7 @@ final class Scanner {
 		}
 
 		$candidates = array();
-		foreach ( array_unique( $matches[1] ) as $file ) {
+		foreach ( array_slice( array_unique( $matches[1] ), 0, self::MAX_LINKS ) as $file ) {
 			$file = preg_replace( '/(\.[a-z0-9]{2,5})\.(?:webp|avif)$/i', '$1', rawurldecode( $file ) );
 			$base = preg_replace( '/-\d+x\d+(?=\.[a-z0-9]+$)/i', '', $file );
 
@@ -507,6 +526,16 @@ final class Scanner {
 	}
 
 	/**
+	 * Forgets the attachments found for file paths: a new attachment may have
+	 * one of the paths looked up so far.
+	 *
+	 * @return void
+	 */
+	public static function forget_files(): void {
+		self::$file_ids = array();
+	}
+
+	/**
 	 * Looks up attachments by their file path relative to the uploads directory.
 	 *
 	 * @param string[] $files Relative paths, e.g. `2026/10/photo.jpg`.
@@ -516,22 +545,46 @@ final class Scanner {
 	private static function ids_for_files( array $files ): array {
 		global $wpdb;
 
-		$ids = array();
-		foreach ( array_chunk( $files, 200 ) as $chunk ) {
+		$ids     = array();
+		$unknown = array();
+		foreach ( $files as $file ) {
+			if ( isset( self::$file_ids[ $file ] ) ) {
+				$ids = array_merge( $ids, self::$file_ids[ $file ] );
+			} else {
+				$unknown[] = $file;
+			}
+		}
+
+		if ( count( self::$file_ids ) + count( $unknown ) > self::MAX_CACHED_FILES ) {
+			self::$file_ids = array();
+		}
+
+		foreach ( array_chunk( $unknown, 200 ) as $chunk ) {
 			$placeholders = implode( ',', array_fill( 0, count( $chunk ), '%s' ) );
 
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery
-			$found = $wpdb->get_col(
+			$found = $wpdb->get_results(
 				// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- Spread arguments.
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $placeholders is a generated list of %s.
-					"SELECT post_id FROM %i WHERE meta_key = '_wp_attached_file' AND meta_value IN ($placeholders)",
+					"SELECT post_id, meta_value FROM %i WHERE meta_key = '_wp_attached_file' AND meta_value IN ($placeholders)",
 					$wpdb->postmeta,
 					...$chunk
 				)
 			);
 
-			$ids = array_merge( $ids, array_map( 'intval', $found ) );
+			// The comparison follows the collation, which may ignore case.
+			foreach ( $chunk as $file ) {
+				self::$file_ids[ $file ] = array();
+
+				foreach ( $found as $row ) {
+					if ( 0 === strcasecmp( $file, (string) $row->meta_value ) ) {
+						self::$file_ids[ $file ][] = (int) $row->post_id;
+					}
+				}
+			}
+
+			$ids = array_merge( $ids, array_map( 'intval', wp_list_pluck( $found, 'post_id' ) ) );
 		}
 
 		return $ids;

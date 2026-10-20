@@ -115,6 +115,16 @@ msgstr "Kansiolla on oltava nimi."
 msgid "A folder cannot be moved into itself."
 msgstr "Kansiota ei voi siirtää itsensä sisään."
 
+#: includes/folders/class-folders.php:193
+msgid "There are too many folders to create another."
+msgstr "Kansioita on liikaa, jotta uuden voisi luoda."
+
+#: includes/folders/class-folders.php:469
+#. translators: %d: most levels of folders.
+#, php-format
+msgid "Folders can be nested at most %d levels deep."
+msgstr "Kansioita voi sijoittaa sisäkkäin enintään %d tasoa syvälle."
+
 #: includes/folders/class-folders.php:381
 msgid "The folder does not exist."
 msgstr "Kansiota ei ole olemassa."

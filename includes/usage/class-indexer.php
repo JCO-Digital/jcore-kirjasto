@@ -81,6 +81,7 @@ final class Indexer {
 		add_action( 'wp_after_insert_post', array( self::class, 'queue_post' ) );
 		add_action( 'deleted_post', array( self::class, 'post_deleted' ), 10, 2 );
 		add_action( 'delete_term', array( self::class, 'term_deleted' ) );
+		add_action( 'add_attachment', array( Scanner::class, 'forget_files' ) );
 
 		foreach ( array( 'added', 'updated', 'deleted' ) as $action ) {
 			add_action( "{$action}_post_meta", array( self::class, 'post_meta_changed' ), 10, 3 );

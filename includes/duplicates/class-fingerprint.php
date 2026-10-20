@@ -39,6 +39,11 @@ final class Fingerprint {
 	private const IMAGE_TYPES = array( 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif', 'image/bmp' );
 
 	/**
+	 * Images with more pixels than this are not hashed perceptually.
+	 */
+	private const MAX_PIXELS = 50000000;
+
+	/**
 	 * The fingerprint of an attachment, as a row of the fingerprints table.
 	 *
 	 * @param int                       $attachment_id The attachment.
@@ -207,6 +212,13 @@ final class Fingerprint {
 	 * @return int[]|null 72 values from 0 to 255, row by row.
 	 */
 	private static function grey_pixels( string $path ): ?array {
+		// Decoding takes memory by the pixel, whatever the file size; running
+		// out of it is fatal, and would stop the scan at this file every time.
+		$size = @getimagesize( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Unreadable images are skipped.
+		if ( is_array( $size ) && (int) $size[0] * (int) $size[1] > self::MAX_PIXELS ) {
+			return null;
+		}
+
 		$pixels = function_exists( 'imagecreatefromstring' ) ? self::grey_pixels_gd( $path ) : null;
 
 		if ( null === $pixels && class_exists( \Imagick::class ) ) {
@@ -224,6 +236,9 @@ final class Fingerprint {
 	 * @return int[]|null
 	 */
 	private static function grey_pixels_gd( string $path ): ?array {
+		// As core's image editors do before decoding.
+		wp_raise_memory_limit( 'image' );
+
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- A local file.
 		$data  = file_get_contents( $path );
 		$image = false !== $data ? @imagecreatefromstring( $data ) : false; // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Unreadable images are skipped.
