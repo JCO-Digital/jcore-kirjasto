@@ -110,7 +110,7 @@ final class Folders_Controller extends Controller {
 			$this->namespace,
 			$base . '/import',
 			array(
-				$this->route( \WP_REST_Server::READABLE, 'import_sources', array(), 'manage_permission' ),
+				$this->route( \WP_REST_Server::READABLE, 'import_sources', array(), 'import_permission' ),
 				$this->route(
 					\WP_REST_Server::CREATABLE,
 					'import',
@@ -125,7 +125,7 @@ final class Folders_Controller extends Controller {
 							'default' => 0,
 						),
 					),
-					'manage_permission'
+					'import_permission'
 				),
 			)
 		);
@@ -147,6 +147,15 @@ final class Folders_Controller extends Controller {
 	 */
 	public function manage_permission(): bool {
 		return current_user_can( Folders::capability() );
+	}
+
+	/**
+	 * Permission callback: who may import folders from another plugin.
+	 *
+	 * @return bool
+	 */
+	public function import_permission(): bool {
+		return current_user_can( Folders::import_capability() );
 	}
 
 	/**

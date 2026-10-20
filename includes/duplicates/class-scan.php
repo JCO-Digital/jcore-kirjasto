@@ -111,7 +111,20 @@ final class Scan {
 
 		$ids = self::next( (int) $state['after'] );
 		_prime_post_caches( $ids, false, true );
-		array_map( array( Indexer::class, 'index' ), $ids );
+
+		// A step that died, out of memory say, left the attachment it was on
+		// in the state: it is skipped, so the scan does not die there again.
+		$failed = (int) ( $state['current'] ?? 0 );
+		foreach ( $ids as $id ) {
+			if ( $id === $failed ) {
+				continue;
+			}
+
+			$state['current'] = $id;
+			update_option( self::STATE_OPTION, $state, true );
+			Indexer::index( $id );
+		}
+		unset( $state['current'] );
 
 		$state['processed'] += count( $ids );
 

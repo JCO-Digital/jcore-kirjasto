@@ -70,6 +70,13 @@ final class Finder {
 	private static ?array $index = null;
 
 	/**
+	 * The entries by hash and by byte of their perceptual hash, for matches().
+	 *
+	 * @var array{hashes: array<string, string[]>, bands: array<int, array<string, string[]>>}|null
+	 */
+	private static ?array $lookup = null;
+
+	/**
 	 * Every group of duplicates: identical files first, then the larger
 	 * groups.
 	 *
@@ -140,22 +147,35 @@ final class Finder {
 	 *                                          closest first.
 	 */
 	public static function matches( string $sha1, string $phash, int $width, int $height ): array {
+		$entries = self::entries();
+		$lookup  = self::lookup();
 		$matches = array();
 
-		foreach ( self::entries() as $entry ) {
-			if ( '' !== $sha1 && in_array( $sha1, $entry['hashes'], true ) ) {
-				$matches[] = array(
-					'kind'     => 'identical',
-					'distance' => 0,
-				) + $entry;
-				continue;
-			}
+		foreach ( '' !== $sha1 ? ( $lookup['hashes'][ $sha1 ] ?? array() ) : array() as $file ) {
+			$matches[ $file ] = array(
+				'kind'     => 'identical',
+				'distance' => 0,
+			) + $entries[ $file ];
+		}
 
-			if ( self::comparable( $phash ) && self::comparable( $entry['phash'] ) && self::same_shape( $width, $height, $entry['width'], $entry['height'] ) ) {
+		// Only the entries sharing a byte of the hash can be close enough, as in find().
+		$candidates = array();
+		if ( self::comparable( $phash ) ) {
+			foreach ( str_split( $phash, 2 ) as $i => $byte ) {
+				foreach ( $lookup['bands'][ $i ][ $byte ] ?? array() as $file ) {
+					$candidates[ $file ] = true;
+				}
+			}
+		}
+
+		foreach ( array_keys( array_diff_key( $candidates, $matches ) ) as $file ) {
+			$entry = $entries[ $file ];
+
+			if ( self::same_shape( $width, $height, $entry['width'], $entry['height'] ) ) {
 				$distance = Fingerprint::distance( $phash, $entry['phash'] );
 
 				if ( $distance <= self::threshold() ) {
-					$matches[] = array(
+					$matches[ $file ] = array(
 						'kind'     => 'similar',
 						'distance' => $distance,
 					) + $entry;
@@ -166,7 +186,7 @@ final class Finder {
 		usort(
 			$matches,
 			static function ( array $a, array $b ): int {
-				return $a['distance'] <=> $b['distance'];
+				return array( $a['distance'], $a['id'] ) <=> array( $b['distance'], $b['id'] );
 			}
 		);
 
@@ -182,6 +202,7 @@ final class Finder {
 		self::$entries = null;
 		self::$groups  = null;
 		self::$index   = null;
+		self::$lookup  = null;
 	}
 
 	/**
@@ -392,6 +413,37 @@ final class Finder {
 		}
 
 		return self::$entries;
+	}
+
+	/**
+	 * The entries by each of their hashes, and by each byte of their
+	 * perceptual hash in its place.
+	 *
+	 * @return array{hashes: array<string, string[]>, bands: array<int, array<string, string[]>>}
+	 */
+	private static function lookup(): array {
+		if ( null !== self::$lookup ) {
+			return self::$lookup;
+		}
+
+		self::$lookup = array(
+			'hashes' => array(),
+			'bands'  => array(),
+		);
+
+		foreach ( self::entries() as $file => $entry ) {
+			foreach ( $entry['hashes'] as $hash ) {
+				self::$lookup['hashes'][ $hash ][] = $file;
+			}
+
+			if ( self::comparable( $entry['phash'] ) ) {
+				foreach ( str_split( $entry['phash'], 2 ) as $i => $byte ) {
+					self::$lookup['bands'][ $i ][ $byte ][] = $file;
+				}
+			}
+		}
+
+		return self::$lookup;
 	}
 
 	/**

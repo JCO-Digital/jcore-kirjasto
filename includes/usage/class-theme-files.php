@@ -42,6 +42,16 @@ final class Theme_Files {
 	private const MAX_SIZE = 2097152;
 
 	/**
+	 * Transient set while the files were checked recently.
+	 */
+	private const CHECKED_TRANSIENT = 'jcore_kirjasto_theme_checked';
+
+	/**
+	 * Seconds between checks of the files.
+	 */
+	private const CHECK_INTERVAL = MINUTE_IN_SECONDS;
+
+	/**
 	 * The scannable files, keyed by absolute path, with the source recorded in
 	 * the index: the theme's directory name and the path within it, e.g.
 	 * `kielo/patterns/hero.php`.
@@ -84,15 +94,19 @@ final class Theme_Files {
 	 * Re-indexes the theme right away if its files changed since the last scan,
 	 * so the screen being loaded already shows the result.
 	 *
+	 * Walking the theme on every screen load would cost every user, so the
+	 * files are checked at most once every CHECK_INTERVAL seconds.
+	 *
 	 * @return void
 	 */
 	public static function maybe_reindex(): void {
 		static $checked = false;
 
-		if ( $checked || Rebuild::is_running() ) {
+		if ( $checked || Rebuild::is_running() || get_transient( self::CHECKED_TRANSIENT ) ) {
 			return;
 		}
 		$checked = true;
+		set_transient( self::CHECKED_TRANSIENT, 1, self::CHECK_INTERVAL );
 
 		if ( self::fingerprint() !== get_option( self::FINGERPRINT_OPTION ) ) {
 			Indexer::index_theme();

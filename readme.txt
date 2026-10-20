@@ -16,14 +16,14 @@ JCORE Kirjasto is the J&Co Digital media library plugin. It organises the media 
 
 = Folders =
 
-* **A folder tree** beside the Media screen, in grid and list mode, and inside the media library of every media modal, the block editor's included. Folders nest as deep as needed and are listed alphabetically, with the number of files in each.
+* **A folder tree** beside the Media screen, in grid and list mode, and inside the media library of every media modal, the block editor's included. Folders nest up to 20 levels deep and are listed alphabetically, with the number of files in each.
 * **Drag and drop** – drag files from the grid, the modal or the list onto a folder. Dragging one of the selected files moves the whole selection. Folders are dragged onto each other to nest them.
 * **Uploads go into the open folder.**
 * **The "Folder" field** in the attachment details, and **"Move to folder"** in the list mode bulk actions, move files without dragging.
 * **Import** from FileBird, HappyFiles or Enhanced Media Library, active or not. Their data is left as it is.
 * **WP-CLI** – `wp kirjasto folders list` and `wp kirjasto folders import`.
 
-Deleting a folder deletes no files: they move into the folder above, as do its subfolders. Anyone who can upload files can manage folders; a filter narrows that down. A file can only be moved by someone who may edit it.
+Deleting a folder deletes no files: they move into the folder above, as do its subfolders. Editors and administrators manage folders, and administrators import them; filters change that. A file can only be moved by someone who may edit it.
 
 = Replace =
 
@@ -111,7 +111,7 @@ A folder's count is every file in it, whatever the type or date filter shows.
 
 = Who can manage folders? =
 
-Anyone who can upload files. The `jcore_kirjasto_folders_capability` filter changes the capability needed to create, rename, move and delete folders, e.g. to `edit_others_posts` for editors and up.
+Editors and administrators create, rename, move and delete folders; importing folders from another plugin is for administrators. Anyone who can upload files sees the folders and moves the files they may edit between them. The `jcore_kirjasto_folders_capability` and `jcore_kirjasto_folders_import_capability` filters change the capabilities needed, e.g. to `upload_files` to let authors manage folders too.
 
 = Why do I still see the old file after replacing it? =
 

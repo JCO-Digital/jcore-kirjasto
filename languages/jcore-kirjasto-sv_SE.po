@@ -115,6 +115,16 @@ msgstr "En mapp behöver ett namn."
 msgid "A folder cannot be moved into itself."
 msgstr "En mapp kan inte flyttas in i sig själv."
 
+#: includes/folders/class-folders.php:193
+msgid "There are too many folders to create another."
+msgstr "Det finns för många mappar för att skapa en till."
+
+#: includes/folders/class-folders.php:469
+#. translators: %d: most levels of folders.
+#, php-format
+msgid "Folders can be nested at most %d levels deep."
+msgstr "Mappar kan kapslas högst %d nivåer djupt."
+
 #: includes/folders/class-folders.php:381
 msgid "The folder does not exist."
 msgstr "Mappen finns inte."

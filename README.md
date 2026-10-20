@@ -115,7 +115,7 @@ A feature is a class with a static `register()`, listed in `Plugin::features()`.
 `{prefix}jcore_kirjasto_usage` holds one row per reference: attachment, object (`post`, `term`, `option` or `theme`), context (`content`, `featured`, `field`, `meta`, `site_icon`, `custom_logo`, `option`, `file`) and source (the ACF field key, meta key, option name or theme file, e.g. `kielo/patterns/hero.php`).
 
 - **Incrementally.** `Indexer` queues a post on `wp_after_insert_post` and on any meta change, a term on term meta changes, and the settings on changes to the options they are read from. The queue is indexed once on `shutdown`. Deleting a post or term drops its rows; deleting an attachment drops the rows pointing at it.
-- **Theme files.** Deploys change theme files without a hook, so the media library, the attachment edit screen and the Usage screen compare a fingerprint of the files' sizes and modification times with the last scan, and re-scan the theme before rendering if it differs. Switching or updating a theme re-scans it too.
+- **Theme files.** Deploys change theme files without a hook, so the media library, the attachment edit screen and the Usage screen compare a fingerprint of the files' sizes and modification times with the last scan, and re-scan the theme before rendering if it differs. They check at most once a minute, as walking the theme costs every screen load. Switching or updating a theme re-scans it too.
 - **In full.** `Rebuild` walks posts, then terms with meta, 50 at a time, then the theme and the settings. The cursor is stored in the `jcore_kirjasto_rebuild` option, so WP-Cron, the Usage screen and WP-CLI all advance the same rebuild. When it finishes, rows older than its start belong to objects that are gone and are deleted.
 - **Automatically.** A rebuild starts on first install, and whenever `Scanner::VERSION` changes. Bump it when the scanning rules change, so the new rules reach content nobody edits.
 
@@ -168,7 +168,7 @@ Both screens talk to `jcore-kirjasto/v1`.
 | `/folders` | GET – the tree with counts; POST – create a folder | `upload_files`; creating as below |
 | `/folders/{id}` | PATCH – rename or move; DELETE – delete | `jcore_kirjasto_folders_capability` |
 | `/folders/move` | POST – move attachments into a folder, or 0 for none | `upload_files`, and editing each file |
-| `/folders/import` | GET – sources with folders; POST – run an import step | `jcore_kirjasto_folders_capability` |
+| `/folders/import` | GET – sources with folders; POST – run an import step | `jcore_kirjasto_folders_import_capability` |
 | `/replace/{id}` | POST – replace the file with the uploaded `file` | `upload_files`, and editing the file |
 | `/duplicates` | GET – scan status and a page of groups (`kind`, `page`, `per_page`) | `manage_options` |
 | `/duplicates/scan` | POST – start a scan from the beginning | `manage_options` |
@@ -196,7 +196,8 @@ wp --user=admin kirjasto duplicates merge 123 456  # Merge 456 into 123
 
 - `jcore_kirjasto_features` – the features to load. Remove `usage`, `folders`, `replace` or `duplicates` to turn one off. Merging duplicates needs `usage`.
 - `jcore_kirjasto_duplicate_threshold` – how many of the 64 bits two images may differ in to look the same. Default 6, at most 7.
-- `jcore_kirjasto_folders_capability` – who may create, rename, move and delete folders. Default `upload_files`; moving a file needs the right to edit it.
+- `jcore_kirjasto_folders_capability` – who may create, rename, move and delete folders. Default `edit_others_posts`; moving a file needs `upload_files` and the right to edit it. Folders nest at most 20 levels deep, and there are at most 2000.
+- `jcore_kirjasto_folders_import_capability` – who may import folders from another plugin. Default `manage_options`.
 - `jcore_kirjasto_post_types` – the post types that are indexed.
 - `jcore_kirjasto_block_attributes` – block attributes holding attachment IDs, by block name.
 - `jcore_kirjasto_field_types` – ACF field types whose value is attachment IDs.

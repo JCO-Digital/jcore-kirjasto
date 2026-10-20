@@ -32,6 +32,16 @@ final class Folders {
 	public const KEY = 'jcore_kirjasto_folder';
 
 	/**
+	 * Most levels of folders: the folder list draws the tree recursively.
+	 */
+	public const MAX_DEPTH = 20;
+
+	/**
+	 * Most folders: every screen with the media modal carries the whole tree.
+	 */
+	public const MAX_FOLDERS = 2000;
+
+	/**
 	 * Registers the taxonomy.
 	 *
 	 * @return void
@@ -60,15 +70,33 @@ final class Folders {
 	 * The capability needed to create, rename, move and delete folders.
 	 * Moving an attachment needs the right to edit it instead.
 	 *
+	 * Deleting a folder moves every file in it, whoever uploaded the file, so
+	 * by default only editors and up manage folders.
+	 *
 	 * @return string
 	 */
 	public static function capability(): string {
 		/**
 		 * Filters the capability needed to manage media folders.
 		 *
-		 * @param string $capability Capability. Default `upload_files`.
+		 * @param string $capability Capability. Default `edit_others_posts`.
 		 */
-		return (string) apply_filters( 'jcore_kirjasto_folders_capability', 'upload_files' );
+		return (string) apply_filters( 'jcore_kirjasto_folders_capability', 'edit_others_posts' );
+	}
+
+	/**
+	 * The capability needed to import folders from another plugin. An import
+	 * puts files into folders site-wide.
+	 *
+	 * @return string
+	 */
+	public static function import_capability(): string {
+		/**
+		 * Filters the capability needed to import media folders from another plugin.
+		 *
+		 * @param string $capability Capability. Default `manage_options`.
+		 */
+		return (string) apply_filters( 'jcore_kirjasto_folders_import_capability', 'manage_options' );
 	}
 
 	/**
@@ -155,6 +183,20 @@ final class Folders {
 			return self::not_found();
 		}
 
+		$count = wp_count_terms(
+			array(
+				'taxonomy'   => self::TAXONOMY,
+				'hide_empty' => false,
+			)
+		);
+		if ( (int) $count >= self::MAX_FOLDERS ) {
+			return new \WP_Error( 'jcore_kirjasto_folder_limit', __( 'There are too many folders to create another.', 'jcore-kirjasto' ), array( 'status' => 400 ) );
+		}
+
+		if ( $parent_id && self::depth( $parent_id ) >= self::MAX_DEPTH ) {
+			return self::too_deep();
+		}
+
 		$term = wp_insert_term( $name, self::TAXONOMY, array( 'parent' => $parent_id ) );
 
 		return is_wp_error( $term ) ? self::with_status( $term ) : (int) $term['term_id'];
@@ -189,8 +231,22 @@ final class Folders {
 				return self::not_found();
 			}
 
-			if ( $parent_id === $id || in_array( $parent_id, self::descendants( $id ), true ) ) {
+			$descendants = self::descendants( $id );
+			if ( $parent_id === $id || in_array( $parent_id, $descendants, true ) ) {
 				return new \WP_Error( 'jcore_kirjasto_folder_loop', __( 'A folder cannot be moved into itself.', 'jcore-kirjasto' ), array( 'status' => 400 ) );
+			}
+
+			// The levels the folder and its deepest subfolder take up.
+			$depth  = self::depth( $id );
+			$height = 1 + array_reduce(
+				$descendants,
+				static function ( int $height, int $descendant ) use ( $depth ): int {
+					return max( $height, self::depth( $descendant ) - $depth );
+				},
+				0
+			);
+			if ( ( $parent_id ? self::depth( $parent_id ) : 0 ) + $height > self::MAX_DEPTH ) {
+				return self::too_deep();
 			}
 			$args['parent'] = $parent_id;
 		}
@@ -336,7 +392,20 @@ final class Folders {
 	}
 
 	/**
-	 * Adds the translations of the given attachments, when Polylang translates media.
+	 * How deep a folder is: 1 for a top-level folder.
+	 *
+	 * @param int $id Folder ID.
+	 *
+	 * @return int
+	 */
+	private static function depth( int $id ): int {
+		return 1 + count( get_ancestors( $id, self::TAXONOMY, 'taxonomy' ) );
+	}
+
+	/**
+	 * Adds the translations of the given attachments, when Polylang translates
+	 * media. The callers checked the given attachments; a translation is only
+	 * added if the user may edit it too.
 	 *
 	 * @param int[] $attachment_ids Attachment IDs.
 	 *
@@ -346,8 +415,14 @@ final class Folders {
 		$ids = array_map( 'intval', $attachment_ids );
 
 		if ( function_exists( 'pll_get_post_translations' ) ) {
+			$is_cli = defined( 'WP_CLI' ) && WP_CLI;
+
 			foreach ( $attachment_ids as $id ) {
-				$ids = array_merge( $ids, array_map( 'intval', pll_get_post_translations( (int) $id ) ) );
+				foreach ( array_map( 'intval', pll_get_post_translations( (int) $id ) ) as $translation ) {
+					if ( $is_cli || current_user_can( 'edit_post', $translation ) ) {
+						$ids[] = $translation;
+					}
+				}
 			}
 		}
 
@@ -379,6 +454,23 @@ final class Folders {
 	 */
 	private static function not_found(): \WP_Error {
 		return new \WP_Error( 'jcore_kirjasto_folder_not_found', __( 'The folder does not exist.', 'jcore-kirjasto' ), array( 'status' => 404 ) );
+	}
+
+	/**
+	 * The error for a folder that would be nested too deep.
+	 *
+	 * @return \WP_Error
+	 */
+	private static function too_deep(): \WP_Error {
+		return new \WP_Error(
+			'jcore_kirjasto_folder_depth',
+			sprintf(
+				/* translators: %d: most levels of folders. */
+				__( 'Folders can be nested at most %d levels deep.', 'jcore-kirjasto' ),
+				self::MAX_DEPTH
+			),
+			array( 'status' => 400 )
+		);
 	}
 
 	/**
