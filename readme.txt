@@ -4,7 +4,7 @@ Tags: media, media library, folders, attachments, unused media
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,7 +143,11 @@ Deleting the plugin drops the usage index and the fingerprints, and removes thei
 
 == Changelog ==
 
-= 0.3.0 (2026-10-19) =
+= 0.3.1 (2026-10-20) =
+
+* Fix: tighten folder permissions and bound costly work
+
+= v0.3.0 (2026-10-19) =
 
 * Feature: find and merge duplicate media
 
