@@ -102,6 +102,7 @@ jobs:
       version: ${{ needs.release.outputs.version }}
       release_notes: ${{ needs.release.outputs.release_notes }}
       plugin_file: "jcore-kirjasto.php"
+      dist_deploy: true
       dist_repo: "git@git.jcore.fi:/srv/git/jcore-kirjasto.git"
       slack_channel: "#jcore_updates"
     secrets:
